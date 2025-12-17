@@ -18,10 +18,11 @@ public class RegisterServlet extends HttpServlet {
         String uFull = request.getParameter("fullname");
         String uPhone = request.getParameter("phone");
         String uAddr = request.getParameter("address");
+        String uEmail = request.getParameter("email");
 
         try {
             Connection con = DBConnection.getConnection();
-            String sql = "INSERT INTO users (username, password, full_name, phone, address, role) VALUES (?, ?, ?, ?, ?, 'customer')";
+            String sql = "INSERT INTO users (username, password, full_name, phone, address, email, role) VALUES (?, ?, ?, ?, ?, ?, 'customer')";
 
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, uName);
@@ -29,11 +30,13 @@ public class RegisterServlet extends HttpServlet {
             pst.setString(3, uFull);
             pst.setString(4, uPhone);
             pst.setString(5, uAddr);
+            pst.setString(6, uEmail);
 
             pst.executeUpdate();
 
             // Success -> Go to Login
             response.sendRedirect("login.jsp?msg=Account Created! Please Login.");
+
 
         } catch (Exception e) {
             e.printStackTrace();

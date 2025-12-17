@@ -1,0 +1,125 @@
+/* 1. Global Reset & Background */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f1ea; /* Light Cream background */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    height: 100vh;           /* Full screen height */
+}
+
+/* 2. The Card Container */
+.login-container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(139, 69, 19, 0.15); /* Soft brown shadow */
+    width: 100%;
+    max-width: 380px; /* Nice narrow card width */
+    text-align: center;
+}
+
+/* 3. Typography */
+h2 {
+    margin-bottom: 10px;
+    color: #8B4513; /* SaddleBrown */
+    font-weight: 600;
+}
+
+p.subtitle {
+    color: #888;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 0.9em;
+}
+
+/* 4. Form Elements */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box; /* Ensures padding doesn't break width */
+    transition: border-color 0.3s;
+    font-size: 1rem;
+}
+
+input:focus {
+    border-color: #8B4513;
+    outline: none;
+    background-color: #fffaf6;
+}
+
+/* 5. The Button */
+button.btn-login {
+    width: 100%;
+    padding: 12px;
+    background-color: #8B4513; /* Coffee Brown */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+button.btn-login:hover {
+    background-color: #A0522D; /* Lighter brown on hover */
+}
+
+/* 6. Links & Errors */
+.links {
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.links a {
+    color: #8B4513;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    background-color: #ffe6e6;
+    color: #d8000c;
+    border: 1px solid #ffb3b3;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    display: none; /* Hidden by default, JS/JSP can show it */
+}
+
+.error-message:empty {
+    display: none;
+    padding: 0;
+    border: none;
+}
+
+/* Utility to force show error if JSP sends one */
+.show-error {
+    display: block !important;
+}

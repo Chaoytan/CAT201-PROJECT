@@ -1,31 +1,39 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
-    <title>Kopitiam Login</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; padding-top: 50px; }
-        form { display: inline-block; border: 1px solid #ccc; padding: 20px; border-radius: 10px; }
-        input { display: block; margin: 10px auto; padding: 8px; width: 200px; }
-        button { background-color: #8B4513; color: white; padding: 10px 20px; border: none; cursor: pointer; }
-        .error { color: red; }
-    </style>
+    <title>Login | Guan Heng Coffee Shop</title>
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 
-<h2>Login to Guan Heng Kopitiam</h2>
+<div class="login-container">
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Please enter your details to sign in.</p>
 
-<form action="LoginServlet" method="post">
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="password" name="password" placeholder="Password" required>
+    <% if (request.getAttribute("errorMessage") != null) { %>
+    <div class="error-message show-error">
+        <%= request.getAttribute("errorMessage") %>
+    </div>
+    <% } %>
 
-    <button type="submit">Login</button>
-</form>
+    <form action="LoginServlet" method="post">
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="e.g. ali@gmail.com" required>
+        </div>
 
-<%-- Display Error Message if Login Fails --%>
-<p class="error">${errorMessage}</p>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
 
-<br>
-<a href="register.jsp">Don't have an account? Sign Up</a>
+        <button type="submit" class="btn-login">Sign In</button>
+    </form>
+
+    <div class="links">
+        Don't have an account? <a href="register.jsp">Create account</a>
+    </div>
+</div>
 
 </body>
 </html>

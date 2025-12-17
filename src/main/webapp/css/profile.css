@@ -1,0 +1,147 @@
+/* src/main/webapp/css/profile.css */
+
+/* 1. Reuse the nice background */
+body {
+    margin: 0;
+    padding: 20px 0; /* Add scrolling space */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f1ea;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* 2. Wider Container for Profile Data */
+.profile-container {
+    background: white;
+    padding: 40px;
+    border-radius: 15px; /* Softer corners */
+    box-shadow: 0 10px 30px rgba(139, 69, 19, 0.1); /* Very soft shadow */
+    width: 100%;
+    max-width: 500px; /* Wider than login to fit addresses */
+    margin: auto;
+}
+
+/* 3. Header Styling */
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 20px;
+}
+
+.profile-header h2 {
+    color: #8B4513;
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.profile-header p {
+    color: #888;
+    margin-top: 5px;
+}
+
+/* 4. Form Fields */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Style for Read-Only inputs (View Mode) */
+input[readonly], textarea[readonly] {
+    background-color: #f9f9f9; /* Light grey background */
+    border: 1px solid #eee;
+    color: #333;
+    cursor: default;
+    font-weight: 500;
+}
+
+/* Style for Editable inputs (Edit Mode) */
+input:not([readonly]), textarea:not([readonly]) {
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    box-sizing: border-box; /* Fixes padding issues */
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #8B4513;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+}
+
+/* 5. Action Buttons Area */
+.action-buttons {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 15px; /* Space between buttons */
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* Base Button Style */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn:active {
+    transform: scale(0.98); /* Click effect */
+}
+
+/* Specific Button Colors */
+.btn-primary {
+    background-color: #8B4513; /* Coffee Brown */
+    color: white;
+}
+
+.btn-edit {
+    background-color: #f0ad4e; /* Orange/Yellow */
+    color: white;
+}
+
+.btn-danger {
+    background-color: white;
+    border: 2px solid #d9534f;
+    color: #d9534f;
+}
+.btn-danger:hover {
+    background-color: #d9534f;
+    color: white;
+}
+
+.btn-link-plain {
+    background: none;
+    color: #888;
+    font-weight: normal;
+    font-size: 0.9rem;
+}
+.btn-link-plain:hover {
+    color: #8B4513;
+    text-decoration: underline;
+}

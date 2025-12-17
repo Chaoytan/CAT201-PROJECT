@@ -16,28 +16,29 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String uName = request.getParameter("username");
+        String uEmail = request.getParameter("email");
         String uPass = request.getParameter("password");
 
         try {
             Connection con = DBConnection.getConnection();
-            String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+            String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, uName);
+            pst.setString(1, uEmail);
             pst.setString(2, uPass);
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
                 // 1. Fetch User Details from Database
                 int id = rs.getInt("id");
+                String username = rs.getString("username");
                 String full = rs.getString("full_name");
                 String phone = rs.getString("phone");
-                String addr = rs.getString("address"); // Make sure your DB has this column now
+                String addr = rs.getString("address");
                 String role = rs.getString("role");    // "admin" or "customer"
 
                 // 2. Create the User Object (The "Session Key")
                 // Make sure your User.java constructor matches this!
-                User user = new User(id, uName, full, phone, addr, role);
+                User user = new User(id, username, full, phone, addr, uEmail, role);
 
                 // 3. Save User to Session
                 HttpSession session = request.getSession();
@@ -54,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 
             } else {
                 // Login Failed
-                request.setAttribute("errorMessage", "Invalid Username or Password!");
+                request.setAttribute("errorMessage", "Invalid Email Address or Password!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         } catch (Exception e) {

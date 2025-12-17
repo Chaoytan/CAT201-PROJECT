@@ -1,57 +1,71 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
-    <title>Sign Up | Guan Heng Kopitiam</title>
-    <link rel="stylesheet" href="styles.css"> <style>
-    .auth-container {
-        max-width: 400px;
-        margin: 100px auto;
-        padding: 30px;
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        text-align: center;
-    }
-    input, textarea {
-        width: 100%;
-        padding: 12px;
-        margin: 10px 0;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
-    button {
-        width: 100%;
-        padding: 12px;
-        background-color: #8B4513;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-    }
-    button:hover { background-color: #D2691E; }
-</style>
+    <title>Sign Up | Guan Heng Coffee Shop</title>
+    <link rel="stylesheet" href="css/register.css">
+    <style>
+        .login-container { max-width: 450px; }
+    </style>
 </head>
 <body>
-<div class="auth-container">
-    <h2 style="color: #8B4513;">Create Account</h2>
-    <p>Join Guan Heng Kopitiam today!</p>
+
+<div class="login-container">
+    <h2>Create Account</h2>
+    <p class="subtitle">Join us to start ordering delicious food!</p>
+
+    <%-- Error Message Block --%>
+    <% if (request.getAttribute("errorMessage") != null) { %>
+    <div class="error-message show-error">
+        <%= request.getAttribute("errorMessage") %>
+    </div>
+    <% } %>
 
     <form action="RegisterServlet" method="post">
-        <input type="text" name="username" placeholder="Username (e.g. ali123)" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="text" name="fullname" placeholder="Full Name (e.g. Ali Baba)" required>
-        <input type="text" name="phone" placeholder="Phone Number (e.g. 012-3456789)">
 
-        <textarea name="address" rows="3" placeholder="Delivery Address (e.g. 10, Jalan Universiti, Penang)"></textarea>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Pick a username" required>
+        </div>
 
-        <button type="submit">Sign Up</button>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Create a strong password" required>
+        </div>
+
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="fullname" placeholder="e.g. Ali Baba" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="e.g. ali@gmail.com" required>
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" name="phone" placeholder="e.g. 012-3456789">
+        </div>
+
+        <div class="form-group">
+            <label>Delivery Address</label>
+            <input type="text" name="address" placeholder="Unit No, Street, City" style="height: 50px;">
+        </div>
+
+        <div class="form-group checkbox-group">
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">
+                I agree to the <a href="#" onclick="alert('Rule 1: No fighting.\nRule 2: Enjoy the food!'); return false;">Terms & Conditions</a>
+            </label>
+        </div>
+
+        <button type="submit" class="btn-login">Sign Up</button>
     </form>
 
-    <p style="margin-top: 15px;">
-        Already have an account? <a href="login.jsp" style="color: #D2691E; font-weight: bold;">Login here</a>
-    </p>
+    <div class="links">
+        Already have an account? <a href="login.jsp">Login here</a>
+    </div>
 </div>
+
 </body>
 </html>
