@@ -44,7 +44,7 @@ public class FeedbackServlet extends HttpServlet {
 
             // 4. Success Redirect
             // You can reuse the order-success page or make a simple alert
-            response.sendRedirect("index.jsp?msg=Feedback Submitted! Thank you.");
+            response.sendRedirect("main.jsp?msg=Feedback Submitted! Thank you.");
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,0 +1,45 @@
+/* 1. GLOBAL RESET & BACKGROUND */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f5f2; /* Light creamy coffee color */
+    color: #333;
+    min-height: 100vh;
+}
+
+/* 2. GLOBAL LINKS & BUTTONS */
+a { text-decoration: none; color: inherit; transition: color 0.2s; }
+button { cursor: pointer; font-family: inherit; }
+
+/* 3. NAVIGATION BAR (Moved from menu.css) */
+.header-nav {
+    background-color: #ffffff;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky; /* Keeps nav at top when scrolling */
+    top: 0;
+    z-index: 1000;
+}
+
+.brand-title {
+    font-size: 1.5rem;
+    color: #8B4513; /* Coffee Brown */
+    font-weight: bold;
+    margin: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #555;
+    margin-left: 20px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #8B4513;
+}

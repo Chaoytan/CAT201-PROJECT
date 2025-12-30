@@ -19,6 +19,7 @@
 <html>
 <head>
     <title>Menu | Guan Heng Kopitiam</title>
+    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/menu.css">
     <style>
         /* Specific Styles for Menu Layout */

@@ -13,6 +13,7 @@
 <html>
 <head>
     <title>Submit Feedback | Guan Heng Kopitiam</title>
+    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/login.css"> </head>
 <body>
 
@@ -38,7 +39,7 @@
         </div>
 
         <button type="submit" class="btn-login">Submit Feedback</button>
-        <a href="index.jsp" class="btn-link" style="margin-top: 15px;">Cancel</a>
+        <a href="main.jsp" class="btn-link" style="margin-top: 15px;">Cancel</a>
     </form>
 </div>
 

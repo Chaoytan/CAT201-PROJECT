@@ -1,16 +1,3 @@
-/* 1. Global Reset & Background */
-body {
-    margin: 0;
-    padding: 20px 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f1ea; /* Light Cream background */
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;     /* Center vertically */
-    height: auto;
-    min-height: 100vh;
-}
-
 /* 2. The Card Container */
 .login-container {
     background: white;

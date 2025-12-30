@@ -49,8 +49,8 @@ public class LoginServlet extends HttpServlet {
                     // If Admin -> Go to Dashboard
                     response.sendRedirect("admin-dashboard.jsp");
                 } else {
-                    // If Customer -> Go to Home Page (index.jsp)
-                    response.sendRedirect("index.jsp");
+                    // If Customer -> Go to Home Page (main.jsp)
+                    response.sendRedirect("main.jsp");
                 }
 
             } else {

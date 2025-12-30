@@ -17,7 +17,7 @@
   <div style="margin-top: 30px;">
     <a href="menu.jsp" class="btn-login" style="text-decoration:none; display:inline-block;">Order More Food</a>
     <br><br>
-    <a href="index.jsp" style="color:#888;">Back to Home</a>
+    <a href="main.jsp" style="color:#888;">Back to Home</a>
   </div>
 </div>
 

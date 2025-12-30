@@ -53,7 +53,7 @@
     <div class="action-buttons">
         <a href="edit-profile.jsp" class="btn btn-edit">Edit Details</a>
         <a href="LogoutServlet" class="btn btn-danger">Log Out</a>
-        <a href="index.jsp" class="btn btn-link-plain">Back to Home</a>
+        <a href="main.jsp" class="btn btn-link-plain">Back to Home</a>
     </div>
 
 </div>

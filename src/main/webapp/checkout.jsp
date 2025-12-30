@@ -28,6 +28,7 @@
 <html>
 <head>
   <title>Checkout | Guan Heng Kopitiam</title>
+  <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/cart.css"> </head>
 <body>
 

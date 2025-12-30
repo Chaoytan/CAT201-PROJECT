@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Login | Guan Heng Coffee Shop</title>
+    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>

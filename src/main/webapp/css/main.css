@@ -1,0 +1,144 @@
+/* =========================================
+   1. GLOBAL RESET & LAYOUT
+   ========================================= */
+/*
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f5f2; /* Creamy Background
+    color: #333;
+    min-height: 100vh;
+}*/
+
+
+a { text-decoration: none; color: inherit; transition: color 0.2s; }
+button { cursor: pointer; }
+
+/* =========================================
+   2. NAVIGATION BAR
+   ========================================= */
+.header-nav {
+    background-color: #ffffff;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.brand-title {
+    font-size: 1.5rem;
+    color: #8B4513;
+    font-weight: bold;
+    margin: 0;
+}
+
+.nav-links a {
+    margin-left: 20px;
+    font-weight: 500;
+    color: #555;
+}
+.nav-links a:hover { color: #8B4513; }
+
+/* =========================================
+   3. HERO SECTION (Welcome Text)
+   ========================================= */
+.hero-section {
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    color: #8B4513;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 50px;
+}
+
+/* =========================================
+   4. CARD ROW (FLEXBOX)
+   ========================================= */
+.card-row {
+    display: flex;           /* Makes cards sit side-by-side */
+    justify-content: center; /* Centers them in the middle */
+    gap: 30px;               /* Space between cards */
+    flex-wrap: wrap;         /* Wraps to next line on small screens */
+    align-items: stretch;    /* Forces all cards to be the same height */
+}
+
+/* =========================================
+   5. INDIVIDUAL CARD DESIGN
+   ========================================= */
+.action-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    width: 280px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column; /* Stacks items vertically */
+    transition: transform 0.3s;
+}
+
+.action-card:hover { transform: translateY(-8px); }
+
+.card-content {
+    flex-grow: 1; /* Pushes buttons to the bottom */
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: block;
+    text-align: center;
+}
+
+.action-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.4rem;
+    color: #333;
+    text-align: center;
+}
+
+.action-card p {
+    color: #888;
+    margin: 0;
+    text-align: center;
+}
+
+/* =========================================
+   6. BUTTONS
+   ========================================= */
+.btn-action {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    margin-top: 10px;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: 600;
+    color: white;
+    background-color: #8B4513; /* Default Brown */
+}
+
+.btn-secondary { background-color: #f0f0f0; color: #555; }
+.btn-secondary:hover { background-color: #e0e0e0; color: #333; }
+
+.btn-danger { background-color: #d9534f; }
+.btn-danger:hover { background-color: #c9302c; }
+
+.btn-account { background-color: #f0ad4e; }
