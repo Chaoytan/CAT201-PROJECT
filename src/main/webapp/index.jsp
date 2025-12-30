@@ -19,6 +19,13 @@
         <a href="profile.jsp" class="btn-link">Profile</a>
     </div>
 
-
+<%
+    String msg = request.getParameter("msg");
+    if (msg != null) {
+%>
+<script>alert("<%= msg %>");</script>
+<%
+    }
+%>
 </body>
 </html>
