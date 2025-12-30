@@ -44,14 +44,8 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("currentUser", user);
 
-                // 4. THE REDIRECT LOGIC (Linking to the correct page)
-                if ("admin".equalsIgnoreCase(role)) {
-                    // If Admin -> Go to Dashboard
-                    response.sendRedirect("admin-dashboard.jsp");
-                } else {
-                    // If Customer -> Go to Home Page (main.jsp)
-                    response.sendRedirect("main.jsp");
-                }
+                response.sendRedirect("main.jsp");
+
 
             } else {
                 // Login Failed

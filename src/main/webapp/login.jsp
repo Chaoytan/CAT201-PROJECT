@@ -7,6 +7,12 @@
 </head>
 <body>
 
+<div class="home">
+    <button>
+        <a href="main.jsp">Home</a>
+    </button>
+</div>
+
 <div class="login-container">
     <h2>Welcome Back</h2>
     <p class="subtitle">Please enter your details to sign in.</p>
@@ -28,7 +34,7 @@
             <input type="password" id="password" name="password" placeholder="Enter your password" required>
         </div>
 
-        <button type="submit" class="btn-login">Sign In</button>
+        <button type="submit">Sign In</button>
     </form>
 
     <div class="links">

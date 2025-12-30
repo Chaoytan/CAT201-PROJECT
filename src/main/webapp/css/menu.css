@@ -1,16 +1,6 @@
-/* 2. Navigation Bar (Sticks to top) */
-.header-nav {
-    background-color: #ffffff;
-    padding: 15px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-    z-index: 100; /* Stays on top of content */
-}
-
+/* =========================================
+   2. Navigation Bar
+   ========================================= */
 .brand-title {
     font-size: 1.5rem;
     color: #8B4513; /* Coffee Brown */
@@ -18,79 +8,94 @@
     margin: 0;
 }
 
+h2 a{
+    margin:0;
+    color:#8B4513;
+}
+
+h2 a:hover{
+    color: #5e2c0b;
+}
+
+/* Standard Links (My Profile) */
+.nav-links {
+    display: flex;
+    align-items: center; /* Aligns text vertically */
+    gap: 20px; /* Space between Profile and Cart */
+}
+
 .nav-links a {
     text-decoration: none;
     color: #555;
-    margin-left: 20px;
     font-weight: 500;
     transition: color 0.3s;
 }
+.nav-links a:hover { color: #8B4513; }
 
-.nav-links a:hover {
-    color: #8B4513;
-}
-
-/* 3. The Cart Badge Button */
-.cart-btn {
-    background-color: #8B4513;
-    color: white !important; /* Force white text */
-    padding: 8px 18px;
+/* SPECIAL STYLE FOR CART BUTTON */
+/* We use !important to force the border/background over the default link style */
+a.cart-btn {
+    background-color: #8B4513 !important;
+    color: white !important;
+    padding: 8px 20px !important;
     border-radius: 20px;
     font-weight: bold;
+    display: inline-block;
+    box-shadow: 0 2px 5px rgba(139, 69, 19, 0.3);
 }
 
-.cart-btn:hover {
-    background-color: #a0522d;
+a.cart-btn:hover {
+    background-color: #a0522d !important;
+    transform: translateY(-2px); /* Slight lift effect */
 }
 
-/* 4. Menu Grid Layout */
-.menu-container {
-    max-width: 1200px;
-    margin: 40px auto; /* Center the container */
-    padding: 0 20px;
-}
-
+/* =========================================
+   3. Menu Layout (Fixing the Spacing)
+   ========================================= */
 .section-title {
     font-size: 1.8rem;
     color: #444;
     margin-bottom: 25px;
-    border-left: 5px solid #8B4513; /* Brown accent line */
+    border-left: 5px solid #8B4513;
     padding-left: 15px;
 }
 
 .menu-grid {
     display: grid;
-    /* Auto-fit columns: Min 250px wide, max fits available space */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 30px;
+    margin: 40px 40px;
+    /* Smart Grid: Cards will be minimum 260px wide */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 40px; /* Increased gap between cards */
 }
 
-/* 5. Food Card Design */
+/* =========================================
+   4. Food Card Design
+   ========================================= */
 .food-card {
     background: white;
     border-radius: 12px;
-    overflow: hidden; /* Keeps image corners rounded */
+    overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
-    flex-direction: column; /* Stack image, text, button vertically */
+    flex-direction: column;
 }
 
 .food-card:hover {
-    transform: translateY(-5px); /* Float up slightly */
+    transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
 .food-img {
     width: 100%;
-    height: 180px;
-    object-fit: cover; /* Crop image nicely to fill box */
+    height: 200px; /* Made image slightly taller */
+    object-fit: cover;
     border-bottom: 1px solid #eee;
 }
 
 .food-details {
     padding: 20px;
-    flex-grow: 1; /* Pushes button to bottom if text is short */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
@@ -104,35 +109,37 @@
 }
 
 .food-name {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 700;
     margin: 0 0 10px 0;
-    color: #333;
+    color: #8B4513;
 }
 
 .food-price {
     font-size: 1.3rem;
-    color: #28a745; /* Green for price */
+    color: #28a745;
     font-weight: bold;
     margin-bottom: 15px;
 }
 
-/* 6. Add to Cart Button */
+/* =========================================
+   5. Buttons
+   ========================================= */
 .btn-add {
     display: block;
     width: 100%;
     padding: 12px 0;
-    background-color: #f4f1ea; /* Light background */
+    background-color: #f8f1e5; /* Beige background initially */
     color: #8B4513;
     text-align: center;
     text-decoration: none;
     font-weight: bold;
     border-radius: 8px;
     transition: all 0.2s;
-    margin-top: auto; /* Push to bottom of card */
+    margin-top: auto;
 }
 
 .btn-add:hover {
-    background-color: #8B4513;
+    background-color: #8B4513; /* Turns brown on hover */
     color: white;
 }

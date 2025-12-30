@@ -5,14 +5,14 @@
 %>
 <html>
 <head>
-    <title>Welcome | Guan Heng Kopitiam</title>
+    <title>Welcome | Guan Heng Coffee Shop</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
 <div class="header-nav">
-    <div class="brand-title">Guan Heng Kopitiam</div>
+    <div class="brand-title">Guan Heng Coffee Shop</div>
     <div class="nav-links">
         <% if (currentUser == null) { %>
         <a href="login.jsp">Login</a>
@@ -60,7 +60,24 @@
         </div>
         <% } %>
 
-    </div> </div>
+        <%
+            // Check if user is logged in AND is an admin
+            // (Assumes your User model has a getRole() method)
+            if (currentUser != null && "admin".equals(currentUser.getRole())) {
+        %>
+        <div class="action-card" style="border: 2px solid #8B4513;">
+            <div class="card-content">
+                <span class="card-icon">⚙️</span> <h3>Admin Panel</h3>
+                <p>Manage orders, menu items, and feedback.</p>
+            </div>
+            <a href="admin/dashboard.jsp" class="btn-action" style="background-color: #333;">Go to Dashboard</a>
+        </div>
+        <% } %>
+
+
+    </div>
+</div>
+
 
 <% String msg = request.getParameter("msg"); if (msg != null) { %>
 <script>alert("<%= msg %>");</script>

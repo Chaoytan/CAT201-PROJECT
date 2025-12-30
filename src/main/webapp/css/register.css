@@ -1,5 +1,25 @@
+body {
+    display: flex;
+    justify-content: center; /* Center Horizontal */
+    align-items: center;     /* Center Vertical */
+    min-height: 100vh;       /* Full Height */
+}
+
+.home{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 /* 2. The Card Container */
-.login-container {
+.register-container {
+
     background: white;
     padding: 40px;
     border-radius: 12px;
@@ -7,6 +27,7 @@
     width: 100%;
     max-width: 380px; /* Nice narrow card width */
     text-align: center;
+
 }
 
 /* 3. Typography */

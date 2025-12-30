@@ -2,14 +2,18 @@
 <html>
 <head>
     <title>Sign Up | Guan Heng Coffee Shop</title>
+    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/register.css">
-    <style>
-        .login-container { max-width: 450px; }
-    </style>
 </head>
 <body>
 
-<div class="login-container">
+<div class="home">
+    <button>
+        <a href="main.jsp">Home</a>
+    </button>
+</div>
+
+<div class="register-container">
     <h2>Create Account</h2>
     <p class="subtitle">Join us to start ordering delicious food!</p>
 

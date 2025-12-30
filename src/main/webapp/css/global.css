@@ -14,7 +14,7 @@ button { cursor: pointer; font-family: inherit; }
 
 /* 3. NAVIGATION BAR (Moved from menu.css) */
 .header-nav {
-    background-color: #ffffff;
+    background-color: #ffe8d4;
     padding: 15px 40px;
     display: flex;
     justify-content: space-between;
