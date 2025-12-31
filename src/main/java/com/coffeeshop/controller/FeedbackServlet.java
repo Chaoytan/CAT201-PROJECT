@@ -27,17 +27,26 @@ public class FeedbackServlet extends HttpServlet {
         String subject = request.getParameter("subject");
         String message = request.getParameter("message");
 
+        int rating = 5; // Default to 5 stars if something goes wrong
+        try {
+            // Convert the string "1" to "5" from the form into a number
+            rating = Integer.parseInt(request.getParameter("rating"));
+        } catch (NumberFormatException | NullPointerException e) {
+            rating = 5; // Fallback value
+        }
+
         try {
             Connection con = DBConnection.getConnection();
 
             // 3. Insert into Database
             // We insert NULL for image_url since we are ignoring it
-            String sql = "INSERT INTO feedback (user_id, subject, message, image_url, status) VALUES (?, ?, ?, NULL, 'New')";
+            String sql = "INSERT INTO feedback (user_id, subject, message,rating) VALUES (?, ?, ?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
 
             pst.setInt(1, user.getId());
             pst.setString(2, subject);
             pst.setString(3, message);
+            pst.setInt(4, rating);
 
             pst.executeUpdate();
             con.close();

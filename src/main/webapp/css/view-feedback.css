@@ -1,0 +1,58 @@
+.feedback-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.feedback-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-left: 5px solid #8B4513; /* Brown accent */
+}
+
+.fb-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.fb-subject {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.fb-message {
+    color: #555;
+    line-height: 1.5;
+}
+
+.status-badge {
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.status-New { background-color: #e2e6ea; color: #555; }
+.status-Resolved { background-color: #d4edda; color: #155724; }
+
+a.cart-btn {
+    background-color: #8B4513 !important;
+    color: white !important;
+    padding: 8px 20px !important;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+    box-shadow: 0 2px 5px rgba(139, 69, 19, 0.3);
+}
+
+a.cart-btn:hover {
+    background-color: #a0522d !important;
+    transform: translateY(-2px); /* Slight lift effect */
+}

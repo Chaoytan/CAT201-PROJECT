@@ -1,0 +1,47 @@
+/* STAR RATING CONTAINER */
+.star-rating {
+    direction: rtl; /* Right to Left */
+    display: inline-flex;
+    border: none;
+    margin-bottom: 15px;
+}
+
+/* HIDE RADIO BUTTONS */
+.star-rating input {
+    display: none;
+}
+
+/* === THE FIX: FORCE THE LABELS TO BE BIG === */
+.star-rating label {
+    font-size: 4rem !important; /* Huge Size (approx 64px) */
+    color: #ccc;                /* Default Gray */
+    padding: 0 5px;             /* Space between stars */
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1;             /* Prevents huge vertical gaps */
+}
+
+/* HOVER & CHECKED STATES (Gold) */
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #FFD700;
+}
+
+.cancel {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Aligns text vertically */
+    gap: 20px; /* Space between Profile and Cart */
+}
+
+.cancel a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+.cancel a:hover {
+    color: #8B4513;
+    text-decoration: underline;
+}
