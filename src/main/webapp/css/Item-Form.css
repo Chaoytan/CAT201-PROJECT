@@ -1,0 +1,158 @@
+/* DARK MODE THEME */
+body {
+    background-color: #1a1f2b;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.Container {
+    background: #1e2533;
+    width: 450px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    color: white;
+}
+
+.header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    color: white;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+}
+
+/* Yellow Icon Circle */
+.add-icon {
+    background: #ffc107;
+    color: #1e2533;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+/* Labels */
+.item-name, .Price, .Category, .Upload-Image {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+    margin-top: 18px;
+    color: #ccc;
+    text-transform: uppercase;
+}
+
+/* Standard Text Inputs */
+.textbox1 {
+    width: 100%;
+    padding: 12px;
+    background: #1a1f2b;
+    border: 1px solid #ffc107;
+    border-radius: 6px;
+    color: white;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Radio Buttons */
+.category-options {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.radio-item {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #aaa;
+}
+
+.radio-item input:checked + span {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.radio-item span {
+    margin-left: 8px;
+    font-size: 14px;
+}
+
+/* --- NEW: Image Section Fixes --- */
+
+/* 1. Aligns the preview box with other inputs */
+.image-preview-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #141822; /* Slightly darker than container */
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    border: 1px solid #444; /* Subtle border */
+    box-sizing: border-box; /* Ensures it stays within width */
+}
+
+/* 2. File Input Styling to match width */
+.file-input {
+    width: 100%;
+    padding: 10px 0; /* Remove side padding to align text */
+    color: white;
+    font-size: 14px;
+}
+
+/* 3. Helper Text directly below file input */
+.helper-text {
+    display: block;
+    color: #888;
+    font-size: 12px;
+    margin-top: -5px; /* Pulls it up closer to the input */
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+/* Buttons */
+.Save-Button {
+    margin-top: 10px;
+    display: flex;
+    gap: 15px;
+}
+
+button.Save, button.Cancel {
+    flex: 1;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    background: transparent;
+    border: 2px solid #ffc107;
+    color: white;
+    transition: 0.3s;
+}
+
+button.Save:hover {
+    background-color: #ffc107;
+    color: #1e2533;
+}
+
+button.Cancel {
+    border-color: #d9534f;
+}
+
+button.Cancel:hover {
+    background-color: #d9534f;
+    color: white;
+}
