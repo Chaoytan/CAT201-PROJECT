@@ -70,7 +70,7 @@
                 <span class="card-icon">⚙️</span> <h3>Admin Panel</h3>
                 <p>Manage orders, menu items, and feedback.</p>
             </div>
-            <a href="admin/dashboard.jsp" class="btn-action" style="background-color: #333;">Go to Dashboard</a>
+            <a href="Admin-Menu.jsp" class="btn-action" style="background-color: #333;">Go to Dashboard</a>
         </div>
         <% } %>
 
