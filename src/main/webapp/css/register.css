@@ -156,3 +156,84 @@ button:hover {
     color: #8B4513;
     text-decoration: underline;
 }
+
+/* --- MODAL STYLES --- */
+
+/* The Background Overlay */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 2000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+}
+
+/* The White Box */
+.modal-content {
+    background-color: #fefefe;
+    padding: 0;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s;
+}
+
+/* Header */
+.modal-header {
+    background-color: #8B4513;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 { margin: 0; font-size: 1.2rem; }
+
+/* Close 'X' */
+.close {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close:hover { color: #ddd; }
+
+/* Body */
+.modal-body {
+    padding: 20px;
+    text-align: left; /* Text alignment */
+    color: #555;
+    line-height: 1.6;
+    max-height: 300px; /* Scrollable if text is long */
+    overflow-y: auto;
+}
+
+/* Footer */
+.modal-footer {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    text-align: right;
+}
+
+.btn-agree {
+    background-color: #28a745; /* Green */
+    width: auto;
+    padding: 10px 20px;
+    margin: 0;
+}
+
+.btn-agree:hover { background-color: #218838; }
+
+/* Animation */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-20px);}
+    to {opacity: 1; transform: translateY(0);}
+}

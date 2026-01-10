@@ -7,19 +7,19 @@ button { cursor: pointer; }
 /* =========================================
    2. NAVIGATION BAR
    ========================================= */
-.brand-title {
-    font-size: 1.5rem;
-    color: #8B4513;
-    font-weight: bold;
-    margin: 0;
-}
+/*.brand-title {*/
+/*    font-size: 1.5rem;*/
+/*    color: #8B4513;*/
+/*    font-weight: bold;*/
+/*    margin: 0;*/
+/*}*/
 
-.nav-links a {
-    margin-left: 20px;
-    font-weight: 500;
-    color: #555;
-}
-.nav-links a:hover { color: #8B4513; }
+/*.nav-links a {*/
+/*    margin-left: 20px;*/
+/*    font-weight: 500;*/
+/*    color: #555;*/
+/*}*/
+/*.nav-links a:hover { color: #8B4513; }*/
 
 /* =========================================
    3. HERO SECTION (Welcome Text)

@@ -26,7 +26,7 @@
     </div>
 
     <div class="action-container">
-        <a href="Menu.jsp" class="action-card">
+        <a href="Admin-Menu.jsp" class="action-card">
             <i class="fa-solid fa-utensils"></i>
             <span>Menu Management</span>
         </a>

@@ -3,18 +3,31 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f5f2; /* Light creamy coffee color */
+    /*background-color: #f8f5f2; /* Light creamy coffee color */
     color: #333;
     min-height: 100vh;
+
+    /* Option A: Image with a White Tint (Best for readability) */
+    background: linear-gradient(rgba(255, 248, 242, 0.9), rgba(255, 248, 242, 0.8)),
+    url('../images/guanheng.webp');
+
+    /* Option B: Just the Image (Might make text hard to read) */
+    /* background-image: url('../images/coffee-shop-bg.jpg'); */
+
+    background-size: cover;       /* Ensures image covers the whole screen */
+    background-position: center;  /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    background-attachment: fixed; /* Keeps background still while scrolling */
 }
 
 /* 2. GLOBAL LINKS & BUTTONS */
 a { text-decoration: none; color: inherit; transition: color 0.2s; }
 button { cursor: pointer; font-family: inherit; }
 
-/* 3. NAVIGATION BAR (Moved from menu.css) */
+/* 3. NAVIGATION BAR */
 .header-nav {
-    background-color: #ffe8d4;
+    background-color: rgba(255, 232, 212, 0.85); /* 15% see-through */
+    backdrop-filter: blur(8px); /* This blurs the photo behind the bar */
     padding: 15px 40px;
     display: flex;
     justify-content: space-between;

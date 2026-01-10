@@ -2,7 +2,9 @@
 <html>
 <head>
   <title>Order Success!</title>
-  <link rel="stylesheet" href="css/login.css"> </head>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
 <body style="text-align: center; padding-top: 50px;">
 
 <div class="login-container" style="max-width: 500px;">
@@ -17,7 +19,7 @@
   <div style="margin-top: 30px;">
     <a href="menu.jsp" class="btn-login" style="text-decoration:none; display:inline-block;">Order More Food</a>
     <br><br>
-    <a href="main.jsp" style="color:#888;">Back to Home</a>
+    <a href="main.jsp" class="links" style="color:#888;">Back to Home</a>
   </div>
 </div>
 

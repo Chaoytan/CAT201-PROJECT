@@ -26,7 +26,7 @@
 <body>
 
 <div class="header-nav">
-    <h2>Guan Heng Menu</h2>
+    <div class="brand-title">Guan Heng Menu</div>
 
     <div class="nav-links">
         <a href="main.jsp">Home</a>
