@@ -36,7 +36,7 @@
             <span>Menu Management</span>
         </a>
 
-        <a href="Feedback.jsp" class="action-card">
+        <a href="view-feedback.jsp" class="action-card">
             <i class="fa-solid fa-comments"></i>
             <span>Feedback Inbox</span>
         </a>
