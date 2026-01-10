@@ -101,15 +101,13 @@ input:focus, textarea:focus {
     transform: scale(0.98); /* Click effect */
 }
 
-/* Specific Button Colors */
-.btn-primary {
-    background-color: #8B4513; /* Coffee Brown */
-    color: white;
-}
 
 .btn-edit {
     background-color: #f0ad4e; /* Orange/Yellow */
     color: white;
+}
+.btn-edit:hover {
+    background-color: #f8a437;
 }
 
 .btn-danger {

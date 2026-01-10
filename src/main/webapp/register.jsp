@@ -43,17 +43,25 @@
 
         <div class="form-group">
             <label>Email Address</label>
-            <input type="email" name="email" placeholder="e.g. ali@gmail.com" required>
+            <input type="email" name="email"
+                   placeholder="e.g. ali@gmail.com"
+                   pattern="[^@]+@[^@]+\.[a-zA-Z]{2,}"
+                   title="Must be a valid email (e.g. user@domain.com)"
+                   required>
         </div>
 
         <div class="form-group">
             <label>Phone Number</label>
-            <input type="text" name="phone" placeholder="e.g. 012-3456789">
+            <input type="text" name="phone"
+                   placeholder="e.g. 012-3456789"
+                   pattern="01[0-9]-[0-9]{7,8}"
+                   title="Format: 012-3456789 (e.g., 012-1234567)"
+                   required>
         </div>
 
         <div class="form-group">
             <label>Delivery Address</label>
-            <input type="text" name="address" placeholder="Unit No, Street, City" style="height: 50px;">
+            <input type="text" name="address" placeholder="Unit No, Street, City" style="height: 50px;" required>
         </div>
 
         <div class="form-group checkbox-group">

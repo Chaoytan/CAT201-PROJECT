@@ -25,18 +25,19 @@
 </div>
 
 <div class="hero-section">
-    <h1 class="hero-title">Delicious Local Coffee</h1>
-    <p class="hero-subtitle">Experience the best Nasi Lemak and Kopi O in town.</p>
+    <h1 class="hero-title">Delicious Local Food</h1>
+    <p class="hero-subtitle">Experience the best Local food and drinks in town.</p>
 
     <div class="card-row">
 
         <div class="action-card">
             <div class="card-content">
-                <span class="card-icon">🍔</span>
+                <span class="card-icon">🍚</span>
                 <h3>Order Food</h3>
                 <p>Browse our menu and order online.</p>
             </div>
-            <a href="menu.jsp" class="btn-action">View Menu</a>
+            <a href="menu.jsp" class="btn-action btn-menu">View Menu</a>
+            <a href="cart.jsp" class="btn-action btn-cart">Cart</a>
         </div>
 
         <div class="action-card">
@@ -62,7 +63,6 @@
 
         <%
             // Check if user is logged in AND is an admin
-            // (Assumes your User model has a getRole() method)
             if (currentUser != null && "admin".equals(currentUser.getRole())) {
         %>
         <div class="action-card" style="border: 2px solid #8B4513;">

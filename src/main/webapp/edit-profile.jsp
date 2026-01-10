@@ -49,7 +49,7 @@
     </div>
 
     <div class="action-buttons">
-      <button type="submit" class="btn btn-primary">Save Changes</button>
+      <button type="submit" class="btn btn-edit">Save Changes</button>
       <a href="profile.jsp" class="btn btn-link-plain">Cancel</a>
     </div>
   </form>

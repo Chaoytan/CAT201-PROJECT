@@ -5,24 +5,7 @@ a { text-decoration: none; color: inherit; transition: color 0.2s; }
 button { cursor: pointer; }
 
 /* =========================================
-   2. NAVIGATION BAR
-   ========================================= */
-/*.brand-title {*/
-/*    font-size: 1.5rem;*/
-/*    color: #8B4513;*/
-/*    font-weight: bold;*/
-/*    margin: 0;*/
-/*}*/
-
-/*.nav-links a {*/
-/*    margin-left: 20px;*/
-/*    font-weight: 500;*/
-/*    color: #555;*/
-/*}*/
-/*.nav-links a:hover { color: #8B4513; }*/
-
-/* =========================================
-   3. HERO SECTION (Welcome Text)
+   2. HERO SECTION (Welcome Text)
    ========================================= */
 .hero-section {
     text-align: center;
@@ -111,6 +94,15 @@ button { cursor: pointer; }
     color: white;
     background-color: #8B4513; /* Default Brown */
 }
+.btn-action:hover {background-color: #5c2b00; color: #ffffff;}
+
+.btn-cart {
+    background-color: #28a745; /* Green matches your checkout page */
+    color: white;
+}
+.btn-cart:hover {
+    background-color: #218838; /* Darker Green on hover */
+}
 
 .btn-secondary { background-color: #f0f0f0; color: #555; }
 .btn-secondary:hover { background-color: #e0e0e0; color: #333; }
@@ -119,3 +111,4 @@ button { cursor: pointer; }
 .btn-danger:hover { background-color: #c9302c; }
 
 .btn-account { background-color: #f0ad4e; }
+.btn-account:hover { background-color: #f8a437; }
