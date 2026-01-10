@@ -8,7 +8,17 @@
   // Security: Kick out if not logged in
   User currentUser = (User) session.getAttribute("currentUser");
   if (currentUser == null) {
-    response.sendRedirect("login.jsp?errorMessage=Please login to checkout.");
+
+%>
+<script>
+    // 1. Show the popup
+    alert("Please log in in order to proceed");
+
+    // 2. When click OK, move to login page
+    window.location.href = "login.jsp";
+</script>
+
+<%
     return;
   }
 
@@ -47,8 +57,6 @@
       <h3>2. Payment Method</h3>
       <select name="payment" style="width:100%; padding:10px;">
         <option value="cash">Cash on Delivery (COD)</option>
-        <option value="qr">DuitNow QR</option>
-        <option value="bank">Online Banking</option>
       </select>
     </div>
 

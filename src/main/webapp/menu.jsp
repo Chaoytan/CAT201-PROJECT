@@ -41,7 +41,7 @@
     <%
         try {
             Connection con = DBConnection.getConnection();
-            // Fetch products (Make sure you have inserted some data into DB first!)
+            // Fetch products
             String sql = "SELECT * FROM products ORDER BY category, name";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
@@ -65,7 +65,7 @@
             <h3 class="food-name"><%= name %></h3>
             <div class="food-price">RM <%= df.format(price) %></div>
 
-            <a href="AddToCartServlet?id=<%= id %>" class="btn-add">
+            <a href="javascript:void(0);" onclick="addToCart(<%= id %>)" class="btn-add">
                 + Add to Cart
             </a>
         </div>
@@ -78,6 +78,53 @@
         }
     %>
 </div>
+
+<script>
+    function addToCart(productId) {
+        // 1. Send Background Request
+        fetch('AddToCartServlet?id=' + productId)
+            .then(response => {
+                if (response.ok) {
+                    // 2. Success! Show a small popup (Toast)
+                    showToast("Item added to cart!");
+
+                    // 3. Update the "Cart (X)" number automatically
+                    let cartBtn = document.querySelector(".cart-btn");
+                    let currentText = cartBtn.innerText;
+                    // Extract number, add 1, put it back
+                    let newText = currentText.replace(/(\d+)/, function(n){ return parseInt(n)+1; });
+                    cartBtn.innerText = newText;
+                } else {
+                    alert("Failed to add item.");
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // A simple "Toast" notification function
+    function showToast(message) {
+        // Create the box
+        let toast = document.createElement("div");
+        toast.innerText = message;
+        toast.style.position = "fixed";
+        toast.style.bottom = "20px";
+        toast.style.right = "20px";
+        toast.style.background = "#28a745"; // Green
+        toast.style.color = "white";
+        toast.style.padding = "10px 20px";
+        toast.style.borderRadius = "5px";
+        toast.style.boxShadow = "0 2px 10px rgba(0,0,0,0.2)";
+        toast.style.zIndex = "1000";
+
+        // Add to screen
+        document.body.appendChild(toast);
+
+        // Remove after 3 seconds
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }
+</script>
 
 </body>
 </html>
