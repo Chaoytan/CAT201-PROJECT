@@ -154,3 +154,95 @@ body {
     border-top: 1px solid #1a1f3c;
     margin-top: auto;
 }
+
+/* --- Stats Container --- */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* --- Base Card Design --- */
+.stat-card {
+    border-radius: 16px; /* Smooth rounded corners */
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Icon left, Text right */
+    position: relative;
+    overflow: hidden; /* Keeps the decoration inside */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+    color: white; /* Text is always white on colored background */
+}
+
+/* Hover Effect: Card floats up */
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Card Variants (Gradients) --- */
+/* Order Card: Modern Blue Gradient */
+.blue-accent {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    /* Or try: background: linear-gradient(135deg, #3b82f6, #2563eb); for darker blue */
+}
+
+/* Revenue Card: Modern Green Gradient */
+.green-accent {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    /* Or try: background: linear-gradient(135deg, #10b981, #059669); for darker green */
+}
+
+/* --- Text Styling --- */
+.text-box {
+    text-align: right;
+    z-index: 2; /* Sits above decoration */
+}
+
+.text-box h3 {
+    font-size: 3rem; /* Huge number */
+    font-weight: 800;
+    margin: 0;
+    line-height: 1;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.text-box p {
+    font-size: 1.1rem;
+    margin: 5px 0 0 0;
+    font-weight: 500;
+    opacity: 0.9; /* Slight transparency */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- Icon Styling --- */
+.icon-box {
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.25); /* Glass effect */
+    backdrop-filter: blur(5px);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* --- Decorative Circle (Background Detail) --- */
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.1); /* Very subtle white circle */
+    border-radius: 50%;
+    z-index: 1;
+}

@@ -2,38 +2,6 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="com.coffeeshop.util.DBConnection" %>
 
-<%
-    // 初始化变量
-    int ordersToday = 0;
-    double totalRevenue = 0.0;
-    int newComplaints = 0;
-
-    Connection conn = null;
-    try {
-        // 使用和你 Admin-menu 一致的连接方式
-        conn = DBConnection.getConnection();
-
-        // 1. 获取今日订单数 (修正了 TRUNC 逻辑，确保匹配 Oracle 日期)
-        Statement stmt1 = conn.createStatement();
-        ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(*) FROM orders WHERE TRUNC(order_date) = TRUNC(SYSDATE)");
-        if (rs1.next()) {
-            ordersToday = rs1.getInt(1);
-        }
-
-        // 2. 获取总营收 (只有已完成的订单才算营收，或者你可以去掉 WHERE 子句算总数)
-        Statement stmt2 = conn.createStatement();
-        ResultSet rs2 = stmt2.executeQuery("SELECT SUM(total_amount) FROM orders");
-        if (rs2.next()) {
-            totalRevenue = rs2.getDouble(1);
-        }
-
-    } catch (Exception e) {
-        // 如果报错，直接在页面顶端显示，方便排查
-        out.println("");
-    } finally {
-        if (conn != null) try { conn.close(); } catch(SQLException e) {}
-    }
-%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +13,7 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-]
+
 <nav class="navbar">
     <div class="brand-name">
         <i class="fa-solid fa-layer-group"></i> KOPITIAM ADMIN
@@ -81,23 +49,63 @@
 
     <div class="stats-container">
 
-        <div class="stat-card blue-accent">
-            <div class="icon-box"><i class="fa-solid fa-clipboard-check"></i></div>
-            <div class="text-box">
-                <h3><%= ordersToday %></h3>
-                <p>Orders Today</p>
+        <a href="ViewOrdersServlet" style="text-decoration: none; color: inherit;">
+            <div class="stat-card blue-accent">
+                <div class="icon-box"><i class="fa-solid fa-clipboard-check"></i></div>
+                <div class="text-box">
+                    <%
+                        int orderCount = 0;
+                        try {
+                            // USE YOUR HELPER CLASS!
+                            Connection con = DBConnection.getConnection();
+
+                            // Count today's orders
+                            String sql = "SELECT COUNT(*) FROM ORDERS WHERE TRUNC(ORDER_DATE) = TRUNC(SYSDATE)";
+                            PreparedStatement stmt = con.prepareStatement(sql);
+                            ResultSet rs = stmt.executeQuery();
+
+                            if(rs.next()){
+                                orderCount = rs.getInt(1);
+                            }
+                            con.close();
+                        } catch(Exception e){
+                            e.printStackTrace();
+                        }
+                    %>
+                    <h3><%= orderCount %></h3>
+                    <p>Orders Today</p>
+                </div>
             </div>
-        </div>
+        </a>
 
-        <div class="stat-card green-accent">
-            <div class="icon-box"><i class="fa-solid fa-dollar-sign"></i></div>
-            <div class="text-box">
-                <h3>RM <%= String.format("%.2f", totalRevenue) %></h3>
-                <p>Total Revenue</p>
+        <a href="RevenueDetailsServlet" style="text-decoration: none; color: inherit;">
+            <div class="stat-card green-accent">
+                <div class="icon-box"><i class="fa-solid fa-dollar-sign"></i></div>
+                <div class="text-box">
+                    <%
+                        double totalRevenue = 0.0;
+                        try {
+                            // USE YOUR HELPER CLASS!
+                            Connection con = DBConnection.getConnection();
+
+                            // Sum total amount (Handle NULL with NVL if no orders yet)
+                            String sql = "SELECT NVL(SUM(TOTAL_AMOUNT), 0) FROM ORDERS WHERE TRUNC(ORDER_DATE) = TRUNC(SYSDATE)";
+                            PreparedStatement stmt = con.prepareStatement(sql);
+                            ResultSet rs = stmt.executeQuery();
+
+                            if(rs.next()){
+                                totalRevenue = rs.getDouble(1);
+                            }
+                            con.close();
+                        } catch(Exception e){
+                            e.printStackTrace();
+                        }
+                    %>
+                    <h3>$<%= String.format("%.2f", totalRevenue) %></h3>
+                    <p>Revenue Today</p>
+                </div>
             </div>
-        </div>
-
-
+        </a>
 
     </div>
 </div>
