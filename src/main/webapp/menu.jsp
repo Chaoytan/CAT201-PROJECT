@@ -37,11 +37,18 @@
     </div>
 </div>
 
+<div class="menu-filter-bar" style="margin: 20px 0; text-align: center;">
+    <select id="menuCategory" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-left: 10px;">
+        <option value="all">All Categories</option>
+        <option value="food">Food</option>
+        <option value="drink">Drink</option>
+    </select>
+</div>
+
 <div class="menu-grid">
     <%
         try {
             Connection con = DBConnection.getConnection();
-            // Fetch products
             String sql = "SELECT * FROM products ORDER BY category, name";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
@@ -54,10 +61,9 @@
                 double price = rs.getDouble("price");
                 String img = rs.getString("image_url");
 
-                // Fallback image if null
                 if(img == null || img.isEmpty()) { img = "default.png"; }
     %>
-    <div class="food-card">
+    <div class="food-card" data-category="<%= cat.toLowerCase().replace(" ", "-") %>">
         <img src="images/<%= img %>" class="food-img" alt="<%= name %>">
 
         <div class="food-details">
@@ -124,6 +130,36 @@
             toast.remove();
         }, 3000);
     }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const categorySelect = document.getElementById("menuCategory");
+        const foodCards = document.querySelectorAll(".food-card");
+
+        function filterMenu() {
+            // 1. Get Selected Category
+            const selectedCategory = categorySelect.value.toLowerCase();
+
+            foodCards.forEach(card => {
+                // 2. Get Category from the card
+                const category = card.getAttribute("data-category");
+
+                // 3. Check Match ("all" shows everything)
+                const matchesCategory = (selectedCategory === "all") || (category === selectedCategory);
+
+                // 4. Show or Hide
+                if (matchesCategory) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Run filter when dropdown changes
+        categorySelect.addEventListener("change", filterMenu);
+    });
 </script>
 
 </body>
