@@ -246,3 +246,8 @@ body {
     border-radius: 50%;
     z-index: 1;
 }
+
+.navbar a:hover {
+    color: #d4af37 !important; /* Gold color on hover */
+    transform: scale(1.05); /* Slight pop effect */
+}

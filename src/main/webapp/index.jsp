@@ -14,13 +14,24 @@
 </head>
 <body>
 
-<nav class="navbar">
+<nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+
     <div class="brand-name">
         <i class="fa-solid fa-layer-group"></i> KOPITIAM ADMIN
     </div>
-    <div class="user-profile">
-        <i class="fa-solid fa-circle-user"></i> Hello, Admin
+
+    <div class="nav-actions" style="display: flex; gap: 20px; align-items: center;">
+
+        <a href="main.jsp" style="text-decoration: none; color: white; font-weight: bold; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; transition: color 0.3s;">
+            <i class="fa-solid fa-house"></i> Home
+        </a>
+
+        <div class="user-profile">
+            <i class="fa-solid fa-circle-user"></i> Hello, <%= (session.getAttribute("currentUser") != null) ? ((com.coffeeshop.model.User)session.getAttribute("currentUser")).getUsername() : "Admin" %>
+        </div>
+
     </div>
+
 </nav>
 
 <div class="main-content">

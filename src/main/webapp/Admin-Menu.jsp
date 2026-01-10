@@ -12,20 +12,28 @@
 
 <div class="main">
 
-    <div class="header">
+    <div class="header" style="display: flex; justify-content: space-between; align-items: center;">
+
         <div class="header1">
-            <h1>Menu Management</h1>
+            <h1 style="margin: 0;">Menu Management</h1>
         </div>
-        <a href="index.jsp" style="text-decoration: none;">
-            <button class="btn-home" title="Go Back Home">
-                <i class="fa-solid fa-house"></i>
-            </button>
-        </a>
-        <a href="Item-Form.jsp">
-            <button class="header2">
-                + Add Items
-            </button>
-        </a>
+
+        <div class="action-buttons" style="display: flex; gap: 15px; align-items: center;">
+
+            <a href="index.jsp" style="text-decoration: none;">
+                <button class="header2" style="background-color: #4b5563; min-width: 100px;">
+                    Admin Dashboard
+                </button>
+            </a>
+
+            <a href="Item-Form.jsp" style="text-decoration: none;">
+                <button class="header2">
+                    <i class="fa-solid fa-plus"></i> Add Items
+                </button>
+            </a>
+
+        </div>
+
     </div>
 
     <div class="body">
