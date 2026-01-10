@@ -101,7 +101,7 @@
     </div>
 
     <div class="Home-button">
-        <a href="index.jsp" style="text-decoration: none;">
+        <a href="index2.jsp" style="text-decoration: none;">
             <button class="btn-home" title="Go Back Home">
                 <i class="fa-solid fa-house"></i>
             </button>
