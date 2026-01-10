@@ -1,35 +1,31 @@
 package com.coffeeshop.controller;
 
 import com.coffeeshop.util.DBConnection;
-import com.coffeeshop.util.PasswordUtil; // 引入工具类
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 @WebServlet(name = "RegisterServlet", value = "/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uName = request.getParameter("username");
-        String uPass = request.getParameter("password"); // 这是明文
+        String uPass = request.getParameter("password"); // Hashed by CryptoJS in JSP
         String uFull = request.getParameter("fullname");
+        String uEmail = request.getParameter("email");
         String uPhone = request.getParameter("phone");
         String uAddr = request.getParameter("address");
-        String uEmail = request.getParameter("email");
 
-        // 核心修正：哈希加密
-        String hashedPass = PasswordUtil.hashPassword(uPass);
+        // SQL order matches your CREATE TABLE script exactly
+        String sql = "INSERT INTO users (username, password, full_name, phone, address, email, role) VALUES (?, ?, ?, ?, ?, ?, 'customer')";
 
-        try (Connection con = DBConnection.getConnection()) {
-            String sql = "INSERT INTO users (username, password, full_name, phone, address, email, role) VALUES (?, ?, ?, ?, ?, ?, 'customer')";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
 
-            PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, uName);
-            pst.setString(2, hashedPass); // 存入加密后的密文
+            pst.setString(2, uPass);
             pst.setString(3, uFull);
             pst.setString(4, uPhone);
             pst.setString(5, uAddr);
@@ -38,9 +34,10 @@ public class RegisterServlet extends HttpServlet {
             pst.executeUpdate();
             response.sendRedirect("login.jsp?msg=Account Created! Please Login.");
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            response.getWriter().println("Error: " + e.getMessage());
+            request.setAttribute("errorMessage", "Registration failed: " + e.getMessage());
+            request.getRequestDispatcher("register.jsp").forward(request, response);
         }
     }
 }

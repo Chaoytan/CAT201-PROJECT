@@ -3,57 +3,56 @@ package com.coffeeshop.controller;
 import com.coffeeshop.model.User;
 import com.coffeeshop.util.DBConnection;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String uEmail = request.getParameter("email");
-        String uPass = request.getParameter("password");
 
-        try {
-            Connection con = DBConnection.getConnection();
-            String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-            PreparedStatement pst = con.prepareStatement(sql);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String uEmail = request.getParameter("email");
+        String uPass = request.getParameter("password"); // Already hashed from login.jsp [cite: 7]
+
+        // Explicitly naming columns ensures they match your User constructor order exactly
+        String sql = "SELECT id, username, full_name, phone, address, email, role FROM users WHERE email = ? AND password = ?";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement pst = con.prepareStatement(sql)) {
+
             pst.setString(1, uEmail);
             pst.setString(2, uPass);
-            ResultSet rs = pst.executeQuery();
 
-            if (rs.next()) {
-                // 1. Fetch User Details from Database
-                int id = rs.getInt("id");
-                String username = rs.getString("username");
-                String full = rs.getString("full_name");
-                String phone = rs.getString("phone");
-                String addr = rs.getString("address");
-                String role = rs.getString("role");    // "admin" or "customer"
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    // Mapping DB columns to your User.java constructor
+                    User user = new User(
+                            rs.getInt("id"),
+                            rs.getString("username"),
+                            rs.getString("full_name"),
+                            rs.getString("phone"),
+                            rs.getString("address"),
+                            rs.getString("email"),
+                            rs.getString("role")
+                    );
 
-                // 2. Create the User Object (The "Session Key")
-                // Make sure your User.java constructor matches this!
-                User user = new User(id, username, full, phone, addr, uEmail, role);
+                    HttpSession session = request.getSession();
+                    session.setAttribute("currentUser", user);
+                    response.sendRedirect("main.jsp");
 
-                // 3. Save User to Session
-                HttpSession session = request.getSession();
-                session.setAttribute("currentUser", user);
-
-                response.sendRedirect("main.jsp");
-
-
-            } else {
-                // Login Failed
-                request.setAttribute("errorMessage", "Invalid Email Address or Password!");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("errorMessage", "Invalid Email or Password!");
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace(); // This prints the REAL error to your console
+            request.setAttribute("errorMessage", "Database Error: " + e.getMessage());
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 }
