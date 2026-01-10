@@ -1,3 +1,40 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%@ page import="com.coffeeshop.util.DBConnection" %>
+
+<%
+    // 初始化变量
+    int ordersToday = 0;
+    double totalRevenue = 0.0;
+    int newComplaints = 0;
+
+    Connection conn = null;
+    try {
+        // 使用和你 Admin-menu 一致的连接方式
+        conn = DBConnection.getConnection();
+
+        // 1. 获取今日订单数 (修正了 TRUNC 逻辑，确保匹配 Oracle 日期)
+        Statement stmt1 = conn.createStatement();
+        ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(*) FROM orders WHERE TRUNC(order_date) = TRUNC(SYSDATE)");
+        if (rs1.next()) {
+            ordersToday = rs1.getInt(1);
+        }
+
+        // 2. 获取总营收 (只有已完成的订单才算营收，或者你可以去掉 WHERE 子句算总数)
+        Statement stmt2 = conn.createStatement();
+        ResultSet rs2 = stmt2.executeQuery("SELECT SUM(total_amount) FROM orders");
+        if (rs2.next()) {
+            totalRevenue = rs2.getDouble(1);
+        }
+
+    } catch (Exception e) {
+        // 如果报错，直接在页面顶端显示，方便排查
+        out.println("");
+    } finally {
+        if (conn != null) try { conn.close(); } catch(SQLException e) {}
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +51,7 @@
         <i class="fa-solid fa-layer-group"></i> KOPITIAM ADMIN
     </div>
     <div class="user-profile">
-        <i class="fa-solid fa-circle-user"></i> Hello, Albert
+        <i class="fa-solid fa-circle-user"></i> Hello, Admin
     </div>
 </nav>
 
@@ -35,6 +72,11 @@
             <i class="fa-solid fa-comments"></i>
             <span>Feedback Inbox</span>
         </a>
+
+        <a href="visualize.jsp" class="action-card">
+            <i class="fa-solid fa-comments"></i>
+            <span>Data visualize</span>
+        </a>
     </div>
 
     <div class="stats-container">
@@ -42,7 +84,7 @@
         <div class="stat-card blue-accent">
             <div class="icon-box"><i class="fa-solid fa-clipboard-check"></i></div>
             <div class="text-box">
-                <h3>54</h3>
+                <h3><%= ordersToday %></h3>
                 <p>Orders Today</p>
             </div>
         </div>
@@ -50,18 +92,12 @@
         <div class="stat-card green-accent">
             <div class="icon-box"><i class="fa-solid fa-dollar-sign"></i></div>
             <div class="text-box">
-                <h3>$1,240</h3>
+                <h3>RM <%= String.format("%.2f", totalRevenue) %></h3>
                 <p>Total Revenue</p>
             </div>
         </div>
 
-        <div class="stat-card red-accent">
-            <div class="icon-box"><i class="fa-solid fa-circle-exclamation"></i></div>
-            <div class="text-box">
-                <h3>3</h3>
-                <p>New Complaints</p>
-            </div>
-        </div>
+
 
     </div>
 </div>
