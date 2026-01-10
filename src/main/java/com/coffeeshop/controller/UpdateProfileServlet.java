@@ -9,12 +9,15 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 @WebServlet(name = "UpdateProfileServlet", value = "/UpdateProfileServlet")
 public class UpdateProfileServlet extends HttpServlet {
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // 1. Get Current User Session (To get role, email, username which don't change)
+        // 1. Validate Session
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
 
@@ -27,54 +30,60 @@ public class UpdateProfileServlet extends HttpServlet {
         String newName = request.getParameter("fullname");
         String newPhone = request.getParameter("phone");
         String newAddr = request.getParameter("address");
-        String newPass = request.getParameter("newPassword");
+        String newPass = request.getParameter("newPassword"); // This will be SHA-256 hashed from JSP
 
-        try {
-            Connection con = DBConnection.getConnection();
+        // Use try-with-resources to prevent connection leaks
+        try (Connection con = DBConnection.getConnection()) {
+
+            boolean isChangingPassword = (newPass != null && !newPass.trim().isEmpty());
+            String sql;
             PreparedStatement pst;
 
-            // 3. Check if Password field is empty
-            if (newPass == null || newPass.trim().isEmpty()) {
-                // CASE A: Update Info ONLY (Keep old password)
-                String sql = "UPDATE users SET full_name=?, phone=?, address=? WHERE id=?";
+            if (!isChangingPassword) {
+                // Case A: Update profile details only
+                sql = "UPDATE users SET full_name = ?, phone = ?, address = ? WHERE id = ?";
                 pst = con.prepareStatement(sql);
                 pst.setString(1, newName);
                 pst.setString(2, newPhone);
                 pst.setString(3, newAddr);
                 pst.setInt(4, currentUser.getId());
             } else {
-                // CASE B: Update Info AND Password
-                String sql = "UPDATE users SET full_name=?, phone=?, address=?, password=? WHERE id=?";
+                // Case B: Update profile details AND password
+                sql = "UPDATE users SET full_name = ?, phone = ?, address = ?, password = ? WHERE id = ?";
                 pst = con.prepareStatement(sql);
                 pst.setString(1, newName);
                 pst.setString(2, newPhone);
                 pst.setString(3, newAddr);
-                pst.setString(4, newPass); // Save new password
+                pst.setString(4, newPass);
                 pst.setInt(5, currentUser.getId());
             }
 
-            pst.executeUpdate();
+            int rowsAffected = pst.executeUpdate();
+            pst.close();
 
-            // 4. CRITICAL: Update the Session Object!
-            // If we don't do this, the website will still show the OLD name until logout.
-            // We recreate the User object with the NEW data.
-            User updatedUser = new User(
-                    currentUser.getId(),
-                    currentUser.getUsername(),
-                    newName,               // New Name
-                    newPhone,              // New Phone
-                    newAddr,               // New Address
-                    currentUser.getEmail(),
-                    currentUser.getRole()
-            );
-            session.setAttribute("currentUser", updatedUser);
+            if (rowsAffected > 0) {
+                // 3. Update the Session Object so the UI reflects changes immediately
+                User updatedUser = new User(
+                        currentUser.getId(),
+                        currentUser.getUsername(),
+                        newName,
+                        newPhone,
+                        newAddr,
+                        currentUser.getEmail(),
+                        currentUser.getRole()
+                );
+                session.setAttribute("currentUser", updatedUser);
 
-            // 5. Done
-            response.sendRedirect("profile.jsp?msg=Profile Updated Successfully!");
+                response.sendRedirect("profile.jsp?msg=success");
+            } else {
+                response.sendRedirect("edit-profile.jsp?error=Update failed");
+            }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            response.getWriter().println("Error updating profile: " + e.getMessage());
+            // Redirect back with an error message
+            request.setAttribute("errorMessage", "Database error: " + e.getMessage());
+            request.getRequestDispatcher("edit-profile.jsp").forward(request, response);
         }
     }
 }

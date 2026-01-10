@@ -5,12 +5,12 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 
 <%
-    // 1. Check if user is logged in
+    // 1. Session Security Check
     User currentUser = (User) session.getAttribute("currentUser");
     if (currentUser == null) {
 %>
 <script>
-    alert("Please log in in order to proceed");
+    alert("Please log in to view your profile.");
     window.location.href = "login.jsp";
 </script>
 <%
@@ -20,162 +20,128 @@
 
 <html>
 <head>
-    <title>My Profile</title>
+    <title>My Profile | Guan Heng Coffee Shop</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Extra styles for the Order Table */
-        .order-history-section {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-        }
-        .order-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 0.9em;
-        }
-        .order-table th, .order-table td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-        .order-table th {
-            background-color: #f8f9fa;
-            color: #333;
-        }
-        .badge {
-            padding: 5px 10px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            font-weight: bold;
-        }
+        .order-history-section { margin-top: 30px; padding-top: 20px; border-top: 2px solid #f4f4f4; }
+        .order-table { width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff; }
+        .order-table th { background-color: #f8f9fa; padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6; }
+        .order-table td { padding: 12px; border-bottom: 1px solid #eee; vertical-align: top; }
+        .badge { padding: 5px 10px; border-radius: 20px; font-size: 0.8em; font-weight: 600; text-transform: uppercase; }
         .status-pending { background: #fff3cd; color: #856404; }
         .status-completed { background: #d4edda; color: #155724; }
         .status-cancelled { background: #f8d7da; color: #721c24; }
+        .item-list { list-style: none; padding: 0; margin: 0; font-size: 0.9em; color: #555; }
+        .price-total { font-weight: bold; color: #2c3e50; }
     </style>
 </head>
 <body>
 
 <div class="profile-container">
-
     <div class="profile-header">
-        <h2>My Profile</h2>
-        <p>Welcome back, ${currentUser.username}!</p>
+        <h2><i class="fa-solid fa-user-circle"></i> My Profile</h2>
+        <p>Manage your account and view your history</p>
     </div>
 
-    <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" value="${currentUser.fullName}" readonly>
-    </div>
-
-    <div class="form-group">
-        <label>Email Address</label>
-        <input type="text" value="${currentUser.email}" readonly>
-    </div>
-
-    <div class="form-group">
-        <label>Phone Number</label>
-        <input type="text" value="${currentUser.phone}" readonly>
-    </div>
-
-    <div class="form-group">
-        <label>Saved Address</label>
-        <textarea rows="3" readonly>${currentUser.address}</textarea>
+    <div class="user-details-card">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" value="${currentUser.username}" readonly>
+        </div>
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" value="${currentUser.fullName}" readonly>
+        </div>
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="text" value="${currentUser.email}" readonly>
+        </div>
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" value="${currentUser.phone}" readonly>
+        </div>
+        <div class="form-group">
+            <label>Delivery Address</label>
+            <textarea rows="2" readonly>${currentUser.address}</textarea>
+        </div>
     </div>
 
     <div class="order-history-section">
-        <h3><i class="fa-solid fa-clock-rotate-left"></i> Order History</h3>
-
+        <h3><i class="fa-solid fa-bag-shopping"></i> Recent Orders</h3>
         <table class="order-table">
             <thead>
             <tr>
-                <th style="width: 10%;">Order ID</th>
-                <th style="width: 20%;">Date</th>
-                <th style="width: 40%;">Items Ordered</th> <th style="width: 15%;">Total</th>
-                <th style="width: 15%;">Status</th>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody>
             <%
                 boolean hasOrders = false;
-                Connection con = null;
-                try {
-                    con = DBConnection.getConnection();
-                    // 1. Get Orders
-                    String sql = "SELECT * FROM orders WHERE user_id = ? ORDER BY id DESC";
-                    PreparedStatement pst = con.prepareStatement(sql);
+                // Try-with-resources ensures resources are closed automatically
+                String orderSql = "SELECT id, total_amount, order_date, status FROM orders WHERE user_id = ? ORDER BY id DESC";
+
+                try (Connection con = DBConnection.getConnection();
+                     PreparedStatement pst = con.prepareStatement(orderSql)) {
+
                     pst.setInt(1, currentUser.getId());
-                    ResultSet rs = pst.executeQuery();
+                    try (ResultSet rs = pst.executeQuery()) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, hh:mm a");
 
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        while(rs.next()){
+                            hasOrders = true;
+                            int oId = rs.getInt("id");
+                            String status = rs.getString("status");
 
-                    while(rs.next()){
-                        hasOrders = true;
-                        int oId = rs.getInt("id");
-                        Timestamp oDate = rs.getTimestamp("order_date");
-                        double oTotal = rs.getDouble("total_amount");
-                        String oStatus = rs.getString("status");
-
-                        // Badge Color Logic
-                        String badgeClass = "status-pending";
-                        if("Completed".equalsIgnoreCase(oStatus)) badgeClass = "status-completed";
-                        if("Cancelled".equalsIgnoreCase(oStatus)) badgeClass = "status-cancelled";
+                            String badgeClass = "status-pending";
+                            if("Completed".equalsIgnoreCase(status)) badgeClass = "status-completed";
+                            if("Cancelled".equalsIgnoreCase(status)) badgeClass = "status-cancelled";
             %>
             <tr>
-                <td style="vertical-align: top;"><strong>#<%= oId %></strong></td>
-                <td style="vertical-align: top; color: #666;"><%= sdf.format(oDate) %></td>
-
-                <td style="vertical-align: top;">
-                    <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95em; color: #444;">
+                <td>#<%= oId %></td>
+                <td><%= sdf.format(rs.getTimestamp("order_date")) %></td>
+                <td>
+                    <ul class="item-list">
                         <%
-                            // 2. Nested Query to get Items for THIS Order
-                            try {
-                                String itemSql = "SELECT p.name, oi.quantity FROM order_items oi " +
-                                        "JOIN products p ON oi.product_id = p.id " +
-                                        "WHERE oi.order_id = ?";
-                                PreparedStatement pstItem = con.prepareStatement(itemSql);
+                            // Nested retrieval for items
+                            String itemSql = "SELECT p.name, oi.quantity FROM order_items oi " +
+                                    "JOIN products p ON oi.product_id = p.id " +
+                                    "WHERE oi.order_id = ?";
+                            try (PreparedStatement pstItem = con.prepareStatement(itemSql)) {
                                 pstItem.setInt(1, oId);
-                                ResultSet rsItem = pstItem.executeQuery();
-
-                                while(rsItem.next()){
-                                    String pName = rsItem.getString("name");
-                                    int qty = rsItem.getInt("quantity");
+                                try (ResultSet rsItem = pstItem.executeQuery()) {
+                                    while(rsItem.next()) {
                         %>
-                        <li style="margin-bottom: 2px;">• <%= pName %> <span style="color:#888;">(x<%= qty %>)</span></li>
+                        <li><%= rsItem.getString("name") %> x<%= rsItem.getInt("quantity") %></li>
                         <%
+                                    }
                                 }
-                                rsItem.close();
-                                pstItem.close();
-                            } catch (Exception e) { out.print("<li>Error loading items</li>"); }
+                            }
                         %>
                     </ul>
                 </td>
-
-                <td style="vertical-align: top; font-weight: bold; color: #d4af37;">
-                    RM <%= String.format("%.2f", oTotal) %>
-                </td>
-                <td style="vertical-align: top;">
-                    <span class="badge <%= badgeClass %>"><%= oStatus %></span>
-                </td>
+                <td class="price-total">RM <%= String.format("%.2f", rs.getDouble("total_amount")) %></td>
+                <td><span class="badge <%= badgeClass %>"><%= status %></span></td>
             </tr>
             <%
+                        }
                     }
-                    // Don't close connection here, wait for finally or end of page
-                } catch (Exception e) {
+                } catch (SQLException e) {
                     e.printStackTrace();
-                } finally {
-                    if(con != null) try { con.close(); } catch(Exception e){}
+                    out.println("<tr><td colspan='5' style='color:red;'>System error loading orders.</td></tr>");
                 }
 
                 if (!hasOrders) {
             %>
             <tr>
-                <td colspan="5" style="text-align:center; color:#999; padding:30px;">
-                    <i class="fa-solid fa-utensils" style="font-size: 30px; margin-bottom: 10px; display:block;"></i>
-                    No orders found. Go buy some coffee! ☕
+                <td colspan="5" style="text-align:center; padding: 40px; color: #999;">
+                    No orders yet. Time for a coffee? <br>
+                    <a href="main.jsp" style="color: #d4af37; text-decoration: underline;">Browse Menu</a>
                 </td>
             </tr>
             <% } %>
@@ -188,8 +154,6 @@
         <a href="LogoutServlet" class="btn btn-danger">Log Out</a>
         <a href="main.jsp" class="btn btn-link-plain">Back to Home</a>
     </div>
-
-</div>
 
 </body>
 </html>
