@@ -16,6 +16,11 @@
         <div class="header1">
             <h1>Menu Management</h1>
         </div>
+        <a href="index.jsp" style="text-decoration: none;">
+            <button class="btn-home" title="Go Back Home">
+                <i class="fa-solid fa-house"></i>
+            </button>
+        </a>
         <a href="Item-Form.jsp">
             <button class="header2">
                 + Add Items
@@ -30,8 +35,8 @@
             <div class="filter-container">
                 <select class="category" id="category">
                     <option value="all">All Categories</option>
-                    <option value="main-course">Main Course</option>
-                    <option value="drinks">Drinks</option>
+                    <option value="food">Food</option>
+                    <option value="drink">Drink</option>
                 </select>
             </div>
         </div>
@@ -100,14 +105,59 @@
 
     </div>
 
-    <div class="Home-button">
-        <a href="index2.jsp" style="text-decoration: none;">
-            <button class="btn-home" title="Go Back Home">
-                <i class="fa-solid fa-house"></i>
-            </button>
-        </a>
-    </div>
+
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.querySelector(".search");
+        const categorySelect = document.getElementById("category");
+        const tableRows = document.querySelectorAll("tbody tr");
+
+        function filterTable() {
+            // 1. Get current values
+            const searchText = searchInput.value.toLowerCase();
+            const selectedCategory = categorySelect.value.toLowerCase();
+
+            // 2. Loop through all rows
+            tableRows.forEach(row => {
+                // Get Name (Column 3) and Category (Column 5)
+                // Note: cells[2] is the 3rd <td> (Name)
+                // Note: cells[4] is the 5th <td> (Category)
+                const nameText = row.cells[2].textContent.toLowerCase();
+                const categoryText = row.cells[4].textContent.toLowerCase();
+
+                // 3. Check if Name matches
+                const matchesSearch = nameText.includes(searchText);
+
+                // 4. Check if Category matches
+                let matchesCategory = false;
+                if (selectedCategory === "all") {
+                    matchesCategory = true;
+                } else {
+                    // Handle "main-course" vs "Main Course" logic
+                    // We replace '-' with space to match the database style
+                    const normalizedSelect = selectedCategory.replace("-", " ");
+                    matchesCategory = categoryText.includes(normalizedSelect);
+                }
+
+                // 5. Show or Hide
+                if (matchesSearch && matchesCategory) {
+                    row.style.display = ""; // Show
+                } else {
+                    row.style.display = "none"; // Hide
+                }
+            });
+        }
+
+        // Attach events to trigger the function
+        searchInput.addEventListener("input", filterTable);
+        categorySelect.addEventListener("change", filterTable);
+    });
+</script>
+
+</body>
+</html>
 
 </body>
 </html>

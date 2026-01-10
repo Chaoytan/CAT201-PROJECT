@@ -30,10 +30,6 @@
                 <input type="radio" name="cat" value="Drink">
                 <span>Drink</span>
             </label>
-            <label class="radio-item">
-                <input type="radio" name="cat" value="Dessert">
-                <span>Dessert</span>
-            </label>
         </div>
 
         <div class="Upload-Image">Upload Image</div>
