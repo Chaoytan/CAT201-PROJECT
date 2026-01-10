@@ -77,7 +77,40 @@
     </div>
 </div>
 
+<div id="tcModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Terms & Conditions</h3>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p style="font-size: 0.9em; color: #888; margin-bottom: 20px;">
+                Last Updated: January 2026
+            </p>
+
+            <h4>1. Privacy & Data Protection (PDPA)</h4>
+            <p>We value your privacy. Your personal information (including name, phone number, and address) is collected strictly for the purpose of order processing and delivery. We do not sell or share your data with third parties, in accordance with the Personal Data Protection Act 2010.</p>
+
+            <h4>2. Zero-Tolerance Policy on Abuse</h4>
+            <p>The safety and dignity of our delivery staff are paramount. We strictly prohibit any form of harassment, verbal abuse, or threatening behavior towards our riders. Violation of this policy will result in immediate account suspension.</p>
+
+            <h4>3. Payment Terms (COD)</h4>
+            <p>All transactions are currently <strong>Cash on Delivery (COD)</strong>. By placing an order, you enter a binding contract to accept the items and pay the full amount upon arrival. Please ensure you are present at the delivery location.</p>
+
+            <h4>4. Food Quality & Liability</h4>
+            <p>We strive to serve the freshest local coffee and cuisine. To ensure quality and safety, we recommend consuming all meals immediately upon delivery. Guan Heng Kopitiam is not liable for spoilage due to delayed consumption.</p>
+
+            <h4>5. Community Integrity</h4>
+            <p>We are a community-focused establishment. Users agree to refrain from spreading false information, defamatory rumors, or malicious content regarding the business or other patrons. We reserve the right to ban users who disrupt our community harmony.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-agree" id="btnAgree">I Understand</button>
+        </div>
+    </div>
+</div>
+
 <script>
+
     // 3. 新增加密逻辑函数
     function handleRegister() {
         const passInput = document.getElementById('password');
@@ -98,6 +131,29 @@
     var span = document.getElementsByClassName("close")[0];
     var btnAgree = document.getElementById("btnAgree");
     var checkbox = document.getElementById("terms");
+
+    // Open the modal
+    link.onclick = function(e) {
+        e.preventDefault(); // Stop it from jumping to top
+        modal.style.display = "flex"; // Show it
+    }
+
+    // Close buttons
+    link.onclick = function(e) { e.preventDefault(); modal.style.display = "flex"; }
+    span.onclick = function() { modal.style.display = "none"; }
+
+    // "I Understand" button closes modal AND checks the box
+    btnAgree.onclick = function() {
+        modal.style.display = "none";
+        checkbox.checked = true; // Auto-check the box for better UX
+    }
+
+    // Close if user clicks outside the box
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 
     link.onclick = function(e) { e.preventDefault(); modal.style.display = "flex"; }
     span.onclick = function() { modal.style.display = "none"; }

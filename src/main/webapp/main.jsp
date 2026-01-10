@@ -26,7 +26,7 @@
 
 <div class="hero-section">
     <h1 class="hero-title">Delicious Local Food</h1>
-    <p class="hero-subtitle">Experience the best Local food and drinks in town.</p>
+    <p class="hero-subtitle">Experience the best Local Food and Drinks in town.</p>
 
     <div class="card-row">
 
@@ -55,7 +55,7 @@
             <div class="card-content">
                 <span class="card-icon">👤</span>
                 <h3>My Profile</h3>
-                <p>Manage your address and settings.</p>
+                <p>Manage your profile and view orders.</p>
             </div>
             <a href="profile.jsp" class="btn-action btn-account">My Account</a>
         </div>
