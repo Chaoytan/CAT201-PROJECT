@@ -1,7 +1,5 @@
-/* --- COFFEE ADMIN THEME (Light Mode) --- */
 body {
     background-color: #fdfbf7; /* Cream Background */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,7 +78,7 @@ body {
     box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
 }
 
-/* --- RADIO BUTTONS (Categories) --- */
+/* --- RADIO BUTTONS -- */
 .category-options {
     display: flex;
     gap: 20px;
@@ -132,7 +130,7 @@ body {
     font-size: 14px;
 }
 
-/* File input button styling tweak (Webkit only) */
+/* File input button styling tweak */
 .file-input::file-selector-button {
     background: #e0e0e0;
     border: none;
@@ -169,7 +167,6 @@ button.Save, button.Cancel {
     border: none;
 }
 
-/* Save Button (Brown Gradient) */
 button.Save {
     background: linear-gradient(135deg, #8B4513, #A0522D);
     color: white;
@@ -181,7 +178,7 @@ button.Save:hover {
     box-shadow: 0 6px 15px rgba(139, 69, 19, 0.3);
 }
 
-/* Cancel Button (White with Red Border) */
+
 button.Cancel {
     background: white;
     border: 2px solid #e0e0e0;

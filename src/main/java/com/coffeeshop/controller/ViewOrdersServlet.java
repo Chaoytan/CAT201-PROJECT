@@ -12,7 +12,7 @@ import javax.servlet.http.*;
 public class ViewOrdersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // We will store Orders in a list of Maps for easy display
+        // store Orders in a list of Maps for easy display
         List<Map<String, Object>> ordersList = new ArrayList<>();
 
         try {
@@ -57,6 +57,6 @@ public class ViewOrdersServlet extends HttpServlet {
 
         // Send the clean list to the JSP
         request.setAttribute("todayOrders", ordersList);
-        request.getRequestDispatcher("ViewOrders.jsp").forward(request, response);
+        request.getRequestDispatcher("view-orders.jsp").forward(request, response);
     }
 }

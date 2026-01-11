@@ -11,17 +11,16 @@
     display: none;
 }
 
-/* === THE FIX: FORCE THE LABELS TO BE BIG === */
 .star-rating label {
-    font-size: 4rem !important; /* Huge Size (approx 64px) */
-    color: #ccc;                /* Default Gray */
+    font-size: 4rem !important; /* Huge Size  */
+    color: #ccc;
     padding: 0 5px;             /* Space between stars */
     cursor: pointer;
     transition: all 0.2s;
-    line-height: 1;             /* Prevents huge vertical gaps */
+    line-height: 1;
 }
 
-/* HOVER & CHECKED STATES (Gold) */
+/* HOVER & CHECKED STATES */
 .star-rating input:checked ~ label,
 .star-rating label:hover,
 .star-rating label:hover ~ label {
@@ -31,8 +30,8 @@
 .cancel {
     display: flex;
     justify-content: center;
-    align-items: center; /* Aligns text vertically */
-    gap: 20px; /* Space between Profile and Cart */
+    align-items: center;
+    gap: 20px;
 }
 
 .cancel a {

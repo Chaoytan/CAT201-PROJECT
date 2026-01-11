@@ -112,6 +112,6 @@ public class RevenueDetailsServlet extends HttpServlet {
         request.setAttribute("totalFiltered", totalFilteredRevenue);
         request.setAttribute("countFiltered", orderCount);
 
-        request.getRequestDispatcher("RevenueDetails.jsp").forward(request, response);
+        request.getRequestDispatcher("revenue-details.jsp").forward(request, response);
     }
 }

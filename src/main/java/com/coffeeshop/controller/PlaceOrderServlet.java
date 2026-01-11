@@ -35,7 +35,6 @@ public class PlaceOrderServlet extends HttpServlet {
             con = DBConnection.getConnection();
 
             // 1. Insert into ORDERS table
-            // We use 'generatedKeys' to get the new Order ID back immediately
             String orderSql = "INSERT INTO orders (user_id, total_amount, delivery_address, status) VALUES (?, ?, ?, 'Pending')";
             PreparedStatement pstOrder = con.prepareStatement(orderSql, new String[]{"id"}); // Request the generated ID
 

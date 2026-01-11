@@ -9,7 +9,7 @@
 
     // 2. Check if user is NOT logged in OR if user is NOT an admin
     if (currentUser == null || !"admin".equalsIgnoreCase(currentUser.getRole())) {
-        // 3. Kick them to login page with an error message
+        // 3. Send to login page with an error message
         session.setAttribute("errorMessage", "Access Denied! Admins only.");
         response.sendRedirect("login.jsp");
         return; // Stop the rest of the page from loading
@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/admin-dashboard.css">
 </head>
 <body>
 
@@ -55,7 +55,7 @@
     </div>
 
     <div class="action-container">
-        <a href="Admin-Menu.jsp" class="action-card">
+        <a href="admin-menu.jsp" class="action-card">
             <i class="fa-solid fa-utensils"></i>
             <span>Menu Management</span>
         </a>

@@ -4,7 +4,8 @@
 <html>
 <head>
     <title>Edit Item</title>
-    <link rel="stylesheet" href="css/Item-Form.css">
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+    <link rel="stylesheet" href="css/add-product.css">
 </head>
 <body>
 
@@ -81,7 +82,7 @@
 
         <div class="Save-Button">
             <button class="Save" type="submit">Update</button>
-            <button class="Cancel" type="button" onclick="window.location.href='Admin-Menu.jsp'">Cancel</button>
+            <button class="Cancel" type="button" onclick="window.location.href='admin-menu.jsp'">Cancel</button>
         </div>
 
     </div>

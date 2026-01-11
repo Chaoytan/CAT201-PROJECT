@@ -1,18 +1,18 @@
-/* 1. Global Reset (Optional, keeps things safe) */
+/* Global Reset */
 * { box-sizing: border-box; }
 
-/* 2. Container - INCREASED WIDTH FOR TABLE */
+/* Container - INCREASED WIDTH FOR TABLE */
 .profile-container {
     background: white;
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(139, 69, 19, 0.1);
     width: 100%;
-    max-width: 800px; /* CHANGED from 500px to 800px to fit the table */
+    max-width: 800px;
     margin: 40px auto; /* Added top margin for spacing */
 }
 
-/* 3. Header Styling */
+/* Header Styling */
 .profile-header {
     text-align: center;
     margin-bottom: 30px;
@@ -31,7 +31,7 @@
     margin-top: 5px;
 }
 
-/* 4. Form Fields */
+/* Form Fields */
 .form-group {
     margin-bottom: 20px;
 }
@@ -75,10 +75,10 @@ input:focus, textarea:focus {
     box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
 }
 
-/* 5. Action Buttons (Stacked Vertically) */
+/* Action Buttons (Stacked Vertically) */
 .action-buttons {
     display: flex;
-    flex-direction: column; /* <--- This stacks them Up-to-Down */
+    flex-direction: column;
     align-items: center;    /* Centers them horizontally */
     gap: 15px;
     margin-top: 30px;
@@ -102,16 +102,48 @@ input:focus, textarea:focus {
     font-size: 1rem;
 }
 
-.btn:active { transform: scale(0.98); }
+.btn:active {
+    transform: scale(0.98);
+}
 
-.btn-edit { background-color: #f0ad4e; color: white; }
-.btn-edit:hover { background-color: #f8a437; }
+.btn-edit {
+    background-color: #f0ad4e;
+    color: white;
+}
 
-.btn-danger { background-color: white; border: 2px solid #d9534f; color: #d9534f; }
-.btn-danger:hover { background-color: #d9534f; color: white; }
+.btn-edit:hover {
+    background-color: #b67921;
+}
 
-.btn-link-plain { background: none; color: #888; font-weight: normal; }
-.btn-link-plain:hover { color: #8B4513; text-decoration: underline; }
+.btn-danger {
+    background-color: white;
+    border: 2px solid #d9534f;
+    color: #d9534f;
+}
+
+.btn-danger:hover {
+    background-color: #d9534f;
+    color: white;
+}
+
+.btn-link-plain {
+    background: none;
+    color: #888;
+    font-weight: normal;
+}
+
+.btn-link-plain:hover {
+    color: #8B4513;
+    text-decoration: underline;
+}
+
+button.btn-edit:hover,
+input[type="submit"]:hover {
+    background-color: #6a4d07 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.4);
+    cursor: pointer;
+}
 
 
 /* --- 6. ORDER HISTORY TABLE STYLES (Responsive Fix) --- */

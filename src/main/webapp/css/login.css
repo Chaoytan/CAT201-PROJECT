@@ -18,7 +18,7 @@ body {
     z-index: 10;
 }
 
-/* 2. The Card Container */
+/* The Card Container */
 .login-container {
     background: white;
     padding: 40px;
@@ -29,10 +29,10 @@ body {
     text-align: center;
 }
 
-/* 3. Typography */
+/* Typography */
 h2 {
     margin-bottom: 10px;
-    color: #8B4513; /* SaddleBrown */
+    color: #8B4513;
     font-weight: 600;
 }
 
@@ -43,7 +43,7 @@ p.subtitle {
     font-size: 0.9em;
 }
 
-/* 4. Form Elements */
+/* Form Elements */
 .form-group {
     margin-bottom: 20px;
     text-align: left;
@@ -75,7 +75,7 @@ input:focus {
     background-color: #fffaf6;
 }
 
-/* 5. The Button */
+/* The Button */
 button{
     width: 100%;
     padding: 12px;
@@ -91,10 +91,10 @@ button{
 }
 
 button:hover {
-    background-color: #A0522D; /* Lighter brown on hover */
+    background-color: #A0522D;
 }
 
-/* 6. Links & Errors */
+/* Links & Errors */
 .links {
     margin-top: 20px;
     font-size: 0.9rem;

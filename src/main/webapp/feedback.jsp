@@ -21,7 +21,7 @@
 
 <div class="login-container" style="max-width: 500px;">
     <h2>Submit Feedback</h2>
-    <p class="subtitle">Found a dirty table or have a suggestion? Let us know.</p>
+    <p class="subtitle">Missing food or have a suggestion? Let us know.</p>
 
     <form action="FeedbackServlet" method="post">
 

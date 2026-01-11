@@ -3,7 +3,7 @@
 <head>
     <title>Analytics Dashboard | Guan Heng</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/admin-dashboard.css">
     <link rel="stylesheet" href="css/visualize.css">
     <script src="js/chart.js"></script>
 </head>
@@ -15,6 +15,9 @@
 </nav>
 
 <div class="main-content">
+    <div class="order-header">
+        <a href="admin-dashboard.jsp" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+    </div>
 
     <div class="chart-card">
         <div class="chart-header">
