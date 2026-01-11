@@ -14,8 +14,8 @@
 <body>
 
 <nav class="navbar">
-    <div class="brand-name"><i class="fa-solid fa-layer-group"></i> KOPITIAM ADMIN</div>
-    <div class="user-profile"><i class="fa-solid fa-circle-user"></i> Hello, Albert</div>
+    <div class="brand-name"><i class="fa-solid fa-layer-group"></i> COFFEE SHOP ADMIN</div>
+    <div class="user-profile"><i class="fa-solid fa-circle-user"></i> Hello, Admin</div>
 </nav>
 
 <div class="main-content">
@@ -92,7 +92,7 @@
                         String status = (String) row.get("status");
                         String statusColor = "completed".equalsIgnoreCase(status) ? "#2ecc71" : "#f39c12";
             %>
-            <tr onclick="window.location='ViewOrdersServlet'" style="cursor: pointer;">
+            <tr style="cursor: pointer;">
                 <td>#<%= row.get("id") %></td>
                 <td><%= fmt.format((Date)row.get("date")) %></td>
                 <td><%= row.get("userId") %></td>

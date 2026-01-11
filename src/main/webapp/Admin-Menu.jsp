@@ -5,40 +5,41 @@
 <head>
     <title>Menu Management Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/Admin-Menu.css">
 </head>
 
 <body>
+    <nav class="navbar">
+        <div class="brand-name">
+            <i class="fa-solid fa-layer-group"></i> MENU MANAGEMENT
+        </div>
+        <div class="user-profile">
+            <i class="fa-solid fa-circle-user"></i> Hello, Admin
+        </div>
+    </nav>
 
 <div class="main">
 
     <div class="header" style="display: flex; justify-content: space-between; align-items: center;">
 
-        <div class="header1">
-            <h1 style="margin: 0;">Menu Management</h1>
-        </div>
+<%--        <div class="header1">--%>
+<%--            <h1 style="margin: 0;">Menu Management</h1>--%>
+<%--        </div>--%>
 
-        <div class="action-buttons" style="display: flex; gap: 15px; align-items: center;">
 
-            <a href="index.jsp" style="text-decoration: none;">
-                <button class="header2" style="background-color: #4b5563; min-width: 100px;">
-                    Admin Dashboard
-                </button>
-            </a>
-
-            <a href="Item-Form.jsp" style="text-decoration: none;">
-                <button class="header2">
-                    <i class="fa-solid fa-plus"></i> Add Items
-                </button>
-            </a>
-
-        </div>
 
     </div>
 
     <div class="body">
 
         <div class="body-head">
+
+            <a href="index.jsp" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>Back to Dashboard
+            </a>
+
+
             <input class="search" type="text" placeholder="Search...">
             <div class="filter-container">
                 <select class="category" id="category">
@@ -47,6 +48,12 @@
                     <option value="drink">Drink</option>
                 </select>
             </div>
+            <a href="Item-Form.jsp" style="text-decoration: none;">
+                <button class="header2">
+                    <i class="fa-solid fa-plus"></i> Add Items
+                </button>
+            </a>
+
         </div>
 
         <table>
@@ -89,7 +96,7 @@
                 <td><%= count++ %></td>
                 <td><img class="food-img" src="images/<%= img %>" alt="Item"></td>
                 <td><%= name %></td>
-                <td>$<%= String.format("%.2f", price) %></td>
+                <td>RM<%= String.format("%.2f", price) %></td>
                 <td><%= cat %></td>
                 <td>
                     <a href="EditItem.jsp?id=<%= dbId %>">

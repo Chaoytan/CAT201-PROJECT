@@ -17,7 +17,7 @@
 <nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
 
     <div class="brand-name">
-        <i class="fa-solid fa-layer-group"></i> KOPITIAM ADMIN
+        <i class="fa-solid fa-layer-group"></i> COFFEE SHOP ADMIN
     </div>
 
     <div class="nav-actions" style="display: flex; gap: 20px; align-items: center;">
@@ -27,7 +27,7 @@
         </a>
 
         <div class="user-profile">
-            <i class="fa-solid fa-circle-user"></i> Hello, <%= (session.getAttribute("currentUser") != null) ? ((com.coffeeshop.model.User)session.getAttribute("currentUser")).getUsername() : "Admin" %>
+            <i class="fa-solid fa-circle-user"></i> Hello,Admin
         </div>
 
     </div>
@@ -112,7 +112,7 @@
                             e.printStackTrace();
                         }
                     %>
-                    <h3>$<%= String.format("%.2f", totalRevenue) %></h3>
+                    <h3>RM<%= String.format("%.2f", totalRevenue) %></h3>
                     <p>Revenue Today</p>
                 </div>
             </div>

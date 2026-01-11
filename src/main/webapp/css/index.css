@@ -7,39 +7,48 @@
 }
 
 body {
-    background-color: #0f1322; /* Deep Dark Blue Background */
-    color: white;
+    /* 1. MATCH MAIN THEME: Light Creamy Background */
+    background-color: #fdfbf7;
+    background-image: linear-gradient(rgba(255, 248, 242, 0.9), rgba(255, 248, 242, 0.9)),
+    url('../images/guanheng.webp'); /* Optional: Matches main.jsp texture */
+    background-size: cover;
+    background-attachment: fixed;
+    color: #444; /* Dark Grey text for readability on light bg */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* --- NAVBAR --- */
+/* --- NAVBAR (Admin Style) --- */
 .navbar {
-    background-color: #1a1f3c; /* Matches Menu Page */
+    /* 2. BRAND COLOR: Coffee Brown Header */
+    background-color: #8B4513;
     height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 40px;
-    border-bottom: 2px solid #d4af37; /* Gold Line */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    border-bottom: 4px solid #d4af37; /* Keep Gold Line for premium feel */
+    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.2); /* Soft brown shadow */
 }
 
 .brand-name {
     font-size: 22px;
-    font-weight: bold;
-    color: #d4af37; /* Gold Text */
+    font-weight: 800;
+    color: #ffffff; /* White text pops on Brown */
     letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .user-profile {
-    background-color: #2a304d;
+    /* Glass effect on top of Brown */
+    background-color: rgba(255, 255, 255, 0.2);
     padding: 8px 20px;
     border-radius: 20px;
-    border: 1px solid #d4af37; /* Gold Border */
+    border: 1px solid rgba(255, 255, 255, 0.4);
     font-size: 14px;
     color: white;
+    font-weight: 600;
 }
 
 /* --- MAIN CONTENT LAYOUT --- */
@@ -57,173 +66,129 @@ body {
 .welcome-section h1 {
     font-size: 32px;
     margin-bottom: 10px;
+    color: #5c2b00; /* Dark Coffee Color */
 }
 .welcome-section p {
-    color: #888;
+    color: #777; /* Softer grey */
+    font-size: 1.1rem;
 }
 
-/* --- BIG ACTION CARDS (Menu & Feedback) --- */
+/* --- ACTION CARDS (Menu, Feedback, Visualize) --- */
 .action-container {
     display: flex;
     gap: 30px;
     margin-bottom: 50px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .action-card {
-    background-color: #1a1f3c;
+    /* 3. CARD THEME: White Card with Brown Accents */
+    background-color: #ffffff;
     width: 300px;
     height: 200px;
-    border-radius: 15px;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: #aaa;
-    border: 2px solid transparent;
+    color: #666; /* Grey text */
+    border: 2px solid #eee; /* Subtle border */
     transition: all 0.3s ease;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 25px rgba(139, 69, 19, 0.08); /* Warm shadow */
 }
 
 .action-card i {
     font-size: 50px;
     margin-bottom: 20px;
-    color: #d4af37; /* Gold Icon */
+    /* Gradient Icon Text */
+    background: -webkit-linear-gradient(#d4af37, #8B4513);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .action-card span {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
+    color: #5c2b00; /* Dark Brown */
 }
 
 .action-card:hover {
-    transform: translateY(-5px);
-    border-color: #d4af37; /* Gold Border on Hover */
-    background-color: #232946;
-    color: white;
+    transform: translateY(-8px);
+    border-color: #d4af37;
+    background-color: #fffaf0; /* Light Cream on Hover */
+    box-shadow: 0 15px 35px rgba(139, 69, 19, 0.15);
 }
 
-/* --- STATS CARDS --- */
-.stats-container {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-}
-
-.stat-card {
-    background-color: #1a1f3c;
-    flex: 1;
-    padding: 20px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    border-left: 5px solid transparent; /* Colored Bar placeholder */
-}
-
-.stat-card.blue-accent { border-left-color: #3498db; }
-.stat-card.green-accent { border-left-color: #2ecc71; }
-.stat-card.red-accent { border-left-color: #e74c3c; }
-
-.icon-box {
-    font-size: 30px;
-    opacity: 0.8;
-}
-.blue-accent .icon-box { color: #3498db; }
-.green-accent .icon-box { color: #2ecc71; }
-.red-accent .icon-box { color: #e74c3c; }
-
-.text-box h3 {
-    font-size: 24px;
-    margin-bottom: 5px;
-}
-.text-box p {
-    font-size: 14px;
-    color: #aaa;
-}
-
-/* --- FOOTER --- */
-.footer {
-    text-align: center;
-    padding: 20px;
-    color: #555;
-    font-size: 14px;
-    border-top: 1px solid #1a1f3c;
-    margin-top: auto;
-}
-
-/* --- Stats Container --- */
+/* --- STATS CONTAINER --- */
 .stats-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
     margin-top: 30px;
 }
 
-/* --- Base Card Design --- */
+/* --- STATS CARDS (Keep Gradients for Dashboard Feel) --- */
 .stat-card {
-    border-radius: 16px; /* Smooth rounded corners */
+    border-radius: 16px;
     padding: 30px;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Icon left, Text right */
+    justify-content: space-between;
     position: relative;
-    overflow: hidden; /* Keeps the decoration inside */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
-    color: white; /* Text is always white on colored background */
+    overflow: hidden;
+    /* Sharper shadows for modern look */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: white;
 }
 
-/* Hover Effect: Card floats up */
 .stat-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* --- Card Variants (Gradients) --- */
-/* Order Card: Modern Blue Gradient */
+/* 4. GRADIENTS: Made slightly warmer to fit the Coffee theme */
+/* Order Card: Blue to Cyan */
 .blue-accent {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    /* Or try: background: linear-gradient(135deg, #3b82f6, #2563eb); for darker blue */
+    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
 }
 
-/* Revenue Card: Modern Green Gradient */
+/* Revenue Card: Green to Teal */
 .green-accent {
-    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-    /* Or try: background: linear-gradient(135deg, #10b981, #059669); for darker green */
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
 }
 
-/* --- Text Styling --- */
+/* --- Text Styling inside Stats --- */
 .text-box {
     text-align: right;
-    z-index: 2; /* Sits above decoration */
+    z-index: 2;
 }
 
 .text-box h3 {
-    font-size: 3rem; /* Huge number */
+    font-size: 3rem;
     font-weight: 800;
     margin: 0;
     line-height: 1;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .text-box p {
     font-size: 1.1rem;
     margin: 5px 0 0 0;
-    font-weight: 500;
-    opacity: 0.9; /* Slight transparency */
+    font-weight: 600;
+    opacity: 0.9;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-/* --- Icon Styling --- */
+/* --- Icon Styling inside Stats --- */
 .icon-box {
     width: 70px;
     height: 70px;
-    background: rgba(255, 255, 255, 0.25); /* Glass effect */
+    background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(5px);
     border-radius: 14px;
     display: flex;
@@ -234,7 +199,7 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* --- Decorative Circle (Background Detail) --- */
+/* Decorative Circle */
 .stat-card::before {
     content: '';
     position: absolute;
@@ -242,12 +207,18 @@ body {
     right: -30px;
     width: 150px;
     height: 150px;
-    background: rgba(255, 255, 255, 0.1); /* Very subtle white circle */
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     z-index: 1;
 }
 
-.navbar a:hover {
-    color: #d4af37 !important; /* Gold color on hover */
-    transform: scale(1.05); /* Slight pop effect */
+/* --- FOOTER --- */
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+    font-size: 14px;
+    border-top: 1px solid #e0e0e0;
+    margin-top: auto;
+    background-color: rgba(255,255,255,0.5); /* Semi-transparent */
 }

@@ -1,11 +1,15 @@
+/* 1. Page Layout (Fixed Centering) */
 body {
     display: flex;
-    justify-content: center; /* Center Horizontal */
-    align-items: center;     /* Center Vertical */
     min-height: 100vh;       /* Full Height */
+    padding: 20px;           /* Space around edges */
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-.home{
+/* Home Button */
+.home {
     position: absolute;
     top: 20px;
     left: 20px;
@@ -15,47 +19,51 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
+    z-index: 10; /* Ensures it stays above the card */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Readable on any background */
 }
 
 /* 2. The Card Container */
 .register-container {
-
     background: white;
     padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(139, 69, 19, 0.15); /* Soft brown shadow */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     width: 100%;
-    max-width: 380px; /* Nice narrow card width */
+    max-width: 400px;
     text-align: center;
 
+    /* CRITICAL FIX: This safely centers the card */
+    margin: auto;
+    position: relative;
 }
 
 /* 3. Typography */
 h2 {
     margin-bottom: 10px;
     color: #8B4513; /* SaddleBrown */
-    font-weight: 600;
+    font-weight: 800;
 }
 
 p.subtitle {
-    color: #888;
+    color: #666;
     margin-top: 0;
-    margin-bottom: 30px;
-    font-size: 0.9em;
+    margin-bottom: 25px;
+    font-size: 0.95em;
 }
 
 /* 4. Form Elements */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: left;
 }
 
 label {
     display: block;
-    margin-bottom: 8px;
-    color: #555;
+    margin-bottom: 6px;
+    color: #444;
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 input[type="text"],
@@ -63,10 +71,10 @@ input[type="password"],
 input[type="email"] {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    box-sizing: border-box; /* Ensures padding doesn't break width */
-    transition: border-color 0.3s;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: all 0.3s;
     font-size: 1rem;
 }
 
@@ -74,166 +82,157 @@ input:focus {
     border-color: #8B4513;
     outline: none;
     background-color: #fffaf6;
+    box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
 }
 
 /* 5. The Button */
-button{
+button {
     width: 100%;
-    padding: 12px;
-    background-color: #8B4513; /* Coffee Brown */
+    padding: 14px;
+    background: linear-gradient(135deg, #8B4513, #A0522D); /* Gradient looks better */
     color: white;
     border: none;
-    border-radius: 6px;
-    font-size: 1rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 15px;
 }
 
 button:hover {
-    background-color: #A0522D; /* Lighter brown on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
 }
 
-/* 6. Links & Errors */
+/* 6. Error Message (Fixed Visibility) */
+.error-message {
+    background-color: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: left;
+    display: flex; /* Flex helps align icon if you add one */
+    align-items: center;
+    gap: 8px;
+}
+
+/* Only hide if strictly empty */
+.error-message:empty {
+    display: none;
+    padding: 0;
+    border: none;
+    margin: 0;
+}
+
+/* 7. Links & Checkbox */
 .links {
     margin-top: 20px;
     font-size: 0.9rem;
+    color: #666;
 }
 
 .links a {
     color: #8B4513;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 700;
 }
 
-.links a:hover {
-    text-decoration: underline;
-}
-
-.error-message {
-    background-color: #ffe6e6;
-    color: #d8000c;
-    border: 1px solid #ffb3b3;
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    font-size: 0.9rem;
-    display: none; /* Hidden by default, JS/JSP can show it */
-}
-
-.error-message:empty {
-    display: none;
-    padding: 0;
-    border: none;
-}
-
-/* Utility to force show error if JSP sends one */
-.show-error {
-    display: block !important;
-}
-
-/* T&C Checkbox Styling */
 .checkbox-group {
-    display: flex;       /* Aligns box and text side-by-side */
-    align-items: center; /* Vertically centers them */
+    display: flex;
+    align-items: center;
     font-size: 0.9rem;
     margin-bottom: 20px;
+    text-align: left;
 }
 
-.checkbox-group input[type="checkbox"] {
-    width: auto;         /* Don't stretch 100% like text inputs */
-    margin-right: 10px;  /* Space between box and text */
+.checkbox-group input {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    accent-color: #8B4513;
     cursor: pointer;
 }
 
 .checkbox-group label {
-    margin-bottom: 0;    /* Remove default label margin */
+    margin: 0;
     cursor: pointer;
+    font-weight: normal;
 }
 
 .checkbox-group a {
     color: #8B4513;
     text-decoration: underline;
+    font-weight: bold;
 }
 
-/* --- MODAL STYLES --- */
-
-/* The Background Overlay */
+/* --- MODAL STYLES (Preserved) --- */
 .modal {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
-    z-index: 2000; /* Sit on top */
+    z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
-    justify-content: center; /* Center horizontally */
-    align-items: center;     /* Center vertically */
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
 }
 
-/* The White Box */
 .modal-content {
-    background-color: #fefefe;
-    padding: 0;
-    border-radius: 10px;
+    background-color: #fff;
+    border-radius: 12px;
     width: 90%;
     max-width: 500px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    animation: fadeIn 0.3s;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh; /* Prevents modal from being too tall */
 }
 
-/* Header */
 .modal-header {
     background-color: #8B4513;
     color: white;
     padding: 15px 20px;
-    border-radius: 10px 10px 0 0;
+    border-radius: 12px 12px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.modal-header h3 { margin: 0; font-size: 1.2rem; }
-
-/* Close 'X' */
-.close {
-    color: white;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.close:hover { color: #ddd; }
-
-/* Body */
 .modal-body {
     padding: 20px;
-    text-align: left; /* Text alignment */
-    color: #555;
+    color: #4b5563;
     line-height: 1.6;
-    max-height: 300px; /* Scrollable if text is long */
-    overflow-y: auto;
+    overflow-y: auto; /* Internal scrolling */
 }
 
-/* Footer */
 .modal-footer {
-    padding: 15px;
-    border-top: 1px solid #eee;
+    padding: 15px 20px;
+    border-top: 1px solid #e5e7eb;
     text-align: right;
+    background: #f9fafb;
+    border-radius: 0 0 12px 12px;
 }
 
 .btn-agree {
-    background-color: #28a745; /* Green */
-    width: auto;
-    padding: 10px 20px;
-    margin: 0;
+    background-color: #10b981; /* Nice Green */
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
 }
+.btn-agree:hover { background-color: #059669; }
 
-.btn-agree:hover { background-color: #218838; }
-
-/* Animation */
 @keyframes fadeIn {
-    from {opacity: 0; transform: translateY(-20px);}
-    to {opacity: 1; transform: translateY(0);}
+    from {opacity: 0; transform: scale(0.95);}
+    to {opacity: 1; transform: scale(1);}
 }

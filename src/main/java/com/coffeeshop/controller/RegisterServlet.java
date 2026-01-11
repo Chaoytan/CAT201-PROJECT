@@ -35,8 +35,16 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect("login.jsp?msg=Account Created! Please Login.");
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            request.setAttribute("errorMessage", "Registration failed: " + e.getMessage());
+            String errorMessage = "Registration failed.";
+
+            // Check for "Unique Constraint" error code (00001)
+            if (e.getErrorCode() == 1) {
+                errorMessage = "Username or Email already exists! Please try another.";
+            } else {
+                errorMessage += " Error: " + e.getMessage();
+            }
+
+            request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }
     }

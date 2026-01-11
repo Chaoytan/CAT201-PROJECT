@@ -15,6 +15,7 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
+    z-index: 10;
 }
 
 /* 2. The Card Container */

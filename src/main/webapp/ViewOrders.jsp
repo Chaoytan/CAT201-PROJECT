@@ -9,41 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/ViewOrders.css">
-    <style>
-        /* New Button Style */
-        .btn-complete {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-complete:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-        }
-        /* Style for Disabled/Completed State */
-        .completed-text {
-            color: #10b981;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-    </style>
 </head>
 <body>
 
 <nav class="navbar">
-    <div class="brand-name"><i class="fa-solid fa-layer-group"></i> KOPITIAM ADMIN</div>
-    <div class="user-profile"><i class="fa-solid fa-circle-user"></i> Hello, Albert</div>
+    <div class="brand-name"><i class="fa-solid fa-layer-group"></i> COFFEE SHOP ADMIN</div>
+    <div class="user-profile"><i class="fa-solid fa-circle-user"></i> Hello, Admin</div>
 </nav>
 
 <div class="main-content">

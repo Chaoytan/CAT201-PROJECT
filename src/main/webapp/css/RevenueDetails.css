@@ -1,80 +1,109 @@
+/* --- COFFEE ADMIN THEME (Revenue Page) --- */
+
+/* 1. Main Container (Card Style) */
 .revenue-container {
-    background-color: #1a1f3c;
-    border-radius: 10px;
-    padding: 25px;
+    background-color: #ffffff; /* White Card */
+    border-radius: 16px;
+    padding: 40px;
     margin-top: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(139, 69, 19, 0.1); /* Soft Brown Shadow */
+    border: 1px solid #f0f0f0;
 }
 
+/* 2. Header Section */
 .revenue-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #2a304d;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0; /* Subtle Divider */
 }
 
+/* Header Text (Assumed h1 or h2) */
+.revenue-header h2, .revenue-header h1 {
+    color: #8B4513; /* Coffee Brown */
+    margin: 0;
+}
+
+/* 3. Back Button */
 .back-btn {
-    background-color: #2a304d;
-    color: white;
-    border: 1px solid #d4af37;
-    padding: 8px 20px;
-    border-radius: 5px;
+    background-color: white;
+    color: #8B4513;
+    border: 1px solid #e0e0e0;
+    padding: 10px 20px;
+    border-radius: 8px;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    font-weight: bold;
     transition: all 0.3s ease;
 }
 
 .back-btn:hover {
-    background-color: #d4af37;
-    color: #0f1322;
+    background-color: #8B4513;
+    color: white;
+    border-color: #8B4513;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(139, 69, 19, 0.2);
 }
 
+/* 4. Period Selector (Day/Week/Month Buttons) */
 .period-selector {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
-}
-
-.period-btn {
-    background: #2a304d;
-    border: 1px solid #d4af37;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.period-btn.active {
-    background: #d4af37;
-    color: #0f1322;
-    font-weight: bold;
-}
-
-.period-btn:hover {
-    background: #d4af37;
-    color: #0f1322;
-}
-
-.revenue-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
     margin-bottom: 30px;
 }
 
-.revenue-card {
-    background: #232946;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    border-top: 4px solid;
+.period-btn {
+    background: #fffaf7; /* Light Cream */
+    border: 1px solid #ddd;
+    color: #666;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
 }
 
+.period-btn.active {
+    background: #8B4513; /* Brown for Active */
+    color: white;
+    border-color: #8B4513;
+    box-shadow: 0 4px 10px rgba(139, 69, 19, 0.2);
+}
+
+.period-btn:hover {
+    border-color: #8B4513;
+    color: #8B4513;
+}
+
+/* 5. Revenue Summary Cards (Top Row) */
+.revenue-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.revenue-card {
+    background: #fffaf7; /* Very light cream */
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    border: 1px solid #eee;
+    border-top: 5px solid; /* Keep the colored tops */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+
+.revenue-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* Keep colors but make them slightly easier on the eyes */
 .revenue-card.today { border-top-color: #2ecc71; }
 .revenue-card.week { border-top-color: #3498db; }
 .revenue-card.month { border-top-color: #9b59b6; }
@@ -82,55 +111,116 @@
 
 .revenue-amount {
     font-size: 32px;
-    font-weight: bold;
-    color: #d4af37;
-    margin: 10px 0;
+    font-weight: 800;
+    color: #5c2b00; /* Dark Coffee */
+    margin: 15px 0 5px 0;
 }
 
 .revenue-label {
-    color: #aaa;
+    color: #888;
     font-size: 14px;
-}
-
-.revenue-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.revenue-table th {
-    background: #2a304d;
-    color: #d4af37;
-    padding: 12px;
-    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     font-weight: 600;
 }
 
-.revenue-table td {
-    padding: 12px;
-    border-bottom: 1px solid #2a304d;
-    color: #ddd;
-}
-
-.revenue-table tr:hover {
-    background: #2a304d;
-}
-
+/* 6. Date Filter Inputs */
 .date-filter {
-    background: #2a304d;
-    border: 1px solid #d4af37;
-    color: white;
-    padding: 8px;
-    border-radius: 5px;
-    margin-bottom: 20px;
+    background: white;
+    border: 1px solid #ccc;
+    color: #444;
+    padding: 10px;
+    border-radius: 6px;
+    margin-right: 10px;
+    font-family: inherit;
+}
+
+.date-filter:focus {
+    border-color: #8B4513;
+    outline: none;
 }
 
 .filter-btn {
-    background: #d4af37;
-    color: #0f1322;
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
+    box-shadow: 0 4px 10px rgba(139, 69, 19, 0.2);
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(139, 69, 19, 0.3);
+}
+
+/* 7. Revenue Table */
+.revenue-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px;
+    border-radius: 12px;
+    overflow: hidden; /* Rounds corners */
+    border: 1px solid #eee;
+}
+
+.revenue-table th {
+    background: #8B4513; /* Brown Header */
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.revenue-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    color: #555;
+    background: white;
+}
+
+.revenue-table tr:hover td {
+    background: #fffaf0; /* Highlight row on hover */
+}
+
+/* Remove bottom border from last row */
+.revenue-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* --- FORCE FIX: Make Text Visible --- */
+
+/* 1. Force all general text to be Dark Grey */
+.revenue-container,
+.revenue-container h1,
+.revenue-container h2,
+.revenue-container h3,
+.revenue-container p,
+.revenue-container span,
+.revenue-container div,
+.revenue-table td {
+    color: #444 !important; /* Dark Grey */
+}
+
+/* 2. Force the Big Numbers to be Brown */
+.revenue-amount {
+    color: #8B4513 !important; /* Coffee Brown */
+}
+
+/* 3. EXCEPTION: Keep Text White inside Buttons and Table Headers */
+.revenue-table th,
+.period-btn.active,
+.filter-btn,
+.back-btn:hover {
+    color: #ffffff !important; /* White Text */
+}
+
+/* 4. Ensure Table Header Background is Brown */
+.revenue-table th {
+    background-color: #8B4513 !important;
 }
