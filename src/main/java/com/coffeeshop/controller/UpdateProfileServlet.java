@@ -2,6 +2,7 @@ package com.coffeeshop.controller;
 
 import com.coffeeshop.model.User;
 import com.coffeeshop.util.DBConnection;
+import com.coffeeshop.util.HashUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +31,9 @@ public class UpdateProfileServlet extends HttpServlet {
         String newName = request.getParameter("fullname");
         String newPhone = request.getParameter("phone");
         String newAddr = request.getParameter("address");
-        String newPass = request.getParameter("newPassword"); // This will be SHA-256 hashed from JSP
+        String newPass = request.getParameter("newPassword");
+
+        String newHashedPass = HashUtil.hashSHA256(newPass);
 
         // Use try-with-resources to prevent connection leaks
         try (Connection con = DBConnection.getConnection()) {
@@ -54,7 +57,7 @@ public class UpdateProfileServlet extends HttpServlet {
                 pst.setString(1, newName);
                 pst.setString(2, newPhone);
                 pst.setString(3, newAddr);
-                pst.setString(4, newPass);
+                pst.setString(4, newHashedPass);
                 pst.setInt(5, currentUser.getId());
             }
 

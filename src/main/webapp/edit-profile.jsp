@@ -15,7 +15,6 @@
     <title>Edit Profile | Guan Heng Coffee Shop</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/profile.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
 
@@ -54,21 +53,6 @@
         </div>
     </form>
 </div>
-
-<script>
-    // 4. FIXED function name and logic
-    function handleUpdate() {
-        const passInput = document.getElementById('newPassword');
-        const rawPassword = passInput.value;
-
-        // Only hash if the user actually typed a new password
-        if (rawPassword && rawPassword.trim().length > 0) {
-            const hashedPassword = CryptoJS.SHA256(rawPassword).toString();
-            passInput.value = hashedPassword;
-        }
-        return true;
-    }
-</script>
 
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.coffeeshop.controller;
 
 import com.coffeeshop.model.User;
 import com.coffeeshop.util.DBConnection;
+import com.coffeeshop.util.HashUtil; // Import the new utility
 import java.io.IOException;
 import java.sql.*;
 import javax.servlet.ServletException;
@@ -16,20 +17,21 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String uEmail = request.getParameter("email");
-        String uPass = request.getParameter("password"); // Already hashed from login.jsp [cite: 7]
+        String plainPassword = request.getParameter("password");
 
-        // Explicitly naming columns ensures they match your User constructor order exactly
+        // Hash the incoming plain text password
+        String hashedPass = HashUtil.hashSHA256(plainPassword);
+
         String sql = "SELECT id, username, full_name, phone, address, email, role FROM users WHERE email = ? AND password = ?";
 
         try (Connection con = DBConnection.getConnection();
              PreparedStatement pst = con.prepareStatement(sql)) {
 
             pst.setString(1, uEmail);
-            pst.setString(2, uPass);
+            pst.setString(2, hashedPass);
 
             try (ResultSet rs = pst.executeQuery()) {
                 if (rs.next()) {
-                    // Mapping DB columns to your User.java constructor
                     User user = new User(
                             rs.getInt("id"),
                             rs.getString("username"),
@@ -42,15 +44,15 @@ public class LoginServlet extends HttpServlet {
 
                     HttpSession session = request.getSession();
                     session.setAttribute("currentUser", user);
-                    response.sendRedirect("main.jsp");
 
+                    response.sendRedirect("main.jsp");
                 } else {
                     request.setAttribute("errorMessage", "Invalid Email or Password!");
                     request.getRequestDispatcher("login.jsp").forward(request, response);
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // This prints the REAL error to your console
+            e.printStackTrace();
             request.setAttribute("errorMessage", "Database Error: " + e.getMessage());
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }

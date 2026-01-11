@@ -1,6 +1,8 @@
 package com.coffeeshop.controller;
 
 import com.coffeeshop.util.DBConnection;
+import com.coffeeshop.util.HashUtil;
+
 import java.io.IOException;
 import java.sql.*;
 import javax.servlet.ServletException;
@@ -12,12 +14,13 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uName = request.getParameter("username");
-        String uPass = request.getParameter("password"); // Hashed by CryptoJS in JSP
+        String plainPass = request.getParameter("password"); // Hashed by CryptoJS in JSP
         String uFull = request.getParameter("fullname");
         String uEmail = request.getParameter("email");
         String uPhone = request.getParameter("phone");
         String uAddr = request.getParameter("address");
 
+        String hashedPass = HashUtil.hashSHA256(plainPass);
         // SQL order matches your CREATE TABLE script exactly
         String sql = "INSERT INTO users (username, password, full_name, phone, address, email, role) VALUES (?, ?, ?, ?, ?, ?, 'customer')";
 
@@ -25,7 +28,7 @@ public class RegisterServlet extends HttpServlet {
              PreparedStatement pst = con.prepareStatement(sql)) {
 
             pst.setString(1, uName);
-            pst.setString(2, uPass);
+            pst.setString(2, hashedPass);
             pst.setString(3, uFull);
             pst.setString(4, uPhone);
             pst.setString(5, uAddr);

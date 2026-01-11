@@ -4,7 +4,6 @@
     <title>Sign Up | Guan Heng Coffee Shop</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/register.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
 
@@ -84,6 +83,9 @@
             <span class="close">&times;</span>
         </div>
         <div class="modal-body">
+            <p style="font-size: 0.9em; color: #888; margin-bottom: 20px;">
+                Last Updated: January 2026
+            </p>
 
             <h4>1. Privacy & Data Protection (PDPA)</h4>
             <p>We value your privacy. Your personal information (including name, phone number, and address) is collected strictly for the purpose of order processing and delivery. We do not sell or share your data with third parties, in accordance with the Personal Data Protection Act 2010.</p>
@@ -107,22 +109,7 @@
 </div>
 
 <script>
-
-    // 3. 新增加密逻辑函数
-    function handleRegister() {
-        const passInput = document.getElementById('password');
-        const rawPassword = passInput.value;
-
-        if (rawPassword) {
-            // 在客户端计算 SHA-256 哈希
-            const hashedPassword = CryptoJS.SHA256(rawPassword).toString();
-            // 替换输入框的值为密文
-            passInput.value = hashedPassword;
-        }
-        return true; // 继续提交给 RegisterServlet
-    }
-
-
+    // --- 原有的 Modal 逻辑保持不变 ---
     var modal = document.getElementById("tcModal");
     var link = document.getElementById("tcLink");
     var span = document.getElementsByClassName("close")[0];
