@@ -140,10 +140,11 @@
     function loadData(partId) {
         const type = document.getElementById(partId + '-type').value;
         const period = document.getElementById(partId + '-' + type).value;
-        const category = document.getElementById(partId + '-category')?.value || 'all';
+        const category = document.getElementById(partId + '-category') ? document.getElementById(partId + '-category').value : 'all';
+
         if (!period) return;
 
-        fetch(`VisualizeServlet?part=${partId}&type=${type}&period=${period}&category=${category}`)
+        fetch('VisualizeServlet?part=' + partId + '&type=' + type + '&period=' + period + '&category=' + category)
             .then(res => res.json())
             .then(data => {
                 const now = new Date();
@@ -151,7 +152,9 @@
                 let targetYear, targetMonth;
 
                 if (type === 'month') {
-                    [targetYear, targetMonth] = period.split('-').map(Number);
+                    const parts = period.split('-');
+                    targetYear = parseInt(parts[0]);
+                    targetMonth = parseInt(parts[1]);
                     let days = new Date(targetYear, targetMonth, 0).getDate();
                     for (let d = 1; d <= days; d++) finalLabels.push(d.toString());
                 } else {
@@ -173,31 +176,48 @@
 
                 if (partId === 'p1') {
                     let vals = finalLabels.map((_, i) => isFuture(i) ? null : 0);
-                    data.labels.forEach((day, i) => {
-                        let idx = parseInt(day) - 1;
-                        if (idx >= 0 && idx < vals.length) vals[idx] = data.values[i];
-                    });
+                    if (data.labels) {
+                        data.labels.forEach((day, i) => {
+                            let idx = parseInt(day) - 1;
+                            if (idx >= 0 && idx < vals.length) vals[idx] = data.values[i];
+                        });
+                    }
                     const total = vals.reduce((a, b) => a + (b || 0), 0);
-                    document.getElementById('p1-summary').innerText = `Total: RM ${total.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+
+                    // Fixed syntax for JSP compatibility
+                    const formattedTotal = total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    document.getElementById('p1-summary').innerText = 'Total: RM ' + formattedTotal;
+
                     updateSingleChart(chartP1, finalLabels, vals, 'Total Revenue');
                 } else {
                     let chartObj = (partId === 'p2' ? chartP2 : chartP3);
                     let datasets = {};
+                    let grandTotal = 0;
+
                     for (let prod in data.datasets) {
                         let vals = finalLabels.map((_, i) => isFuture(i) ? null : 0);
-                        data.labels.forEach((day, i) => {
-                            let idx = parseInt(day) - 1;
-                            if (idx >= 0 && idx < vals.length) vals[idx] = data.datasets[prod][i];
-                        });
+                        if (data.labels) {
+                            data.labels.forEach((day, i) => {
+                                let idx = parseInt(day) - 1;
+                                if (idx >= 0 && idx < vals.length) {
+                                    vals[idx] = data.datasets[prod][i];
+                                }
+                            });
+                        }
                         datasets[prod] = vals;
-                    }
-                    let grandTotal = 0;
-                    for (let prod in datasets) {
-                        grandTotal += datasets[prod].reduce((a, b) => a + (b || 0), 0);
+                        grandTotal += vals.reduce((a, b) => a + (b || 0), 0);
                     }
 
-                    const unit = (partId === 'p2') ? "items" : "RM";
-                    const displayTotal = (unit === "RM") ? `Total: RM ${grandTotal.toLocaleString(undefined, {minimumFractionDigits: 2})}` : `Total: ${grandTotal} items`;
+                    const unit = (partId === 'p2') ? " items" : "RM ";
+                    let displayTotal = "";
+
+                    // Fixed syntax for JSP compatibility
+                    if (partId === 'p2') {
+                        displayTotal = 'Total: ' + grandTotal.toLocaleString() + unit;
+                    } else {
+                        displayTotal = 'Total: ' + unit + grandTotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                    }
+
                     document.getElementById(partId + '-summary').innerText = displayTotal;
                     updateMultiChart(chartObj, { labels: finalLabels, datasets });
                 }
@@ -220,7 +240,13 @@
         };
         for (let key in data.datasets) {
             let c = getColor(key);
-            chart.data.datasets.push({ label: key, data: data.datasets[key], borderColor: c, backgroundColor: c, tension: 0.4, fill: false, spanGaps: false });
+            chart.data.datasets.push({ label: key,
+                data: data.datasets[key],
+                borderColor: c,
+                backgroundColor: c,
+                tension: 0,
+                fill: false,
+                spanGaps: false });
         }
         chart.update();
     }
