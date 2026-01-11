@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <html>
 <head>
     <title>Analytics Dashboard | Guan Heng</title>
@@ -19,15 +18,17 @@
 
     <div class="chart-card">
         <div class="chart-header">
-            <h2><i class="fa-solid fa-money-bill-trend-up"></i> Part 1: Total Revenue</h2>
+            <div class="header-left">
+                <h2><i class="fa-solid fa-money-bill-trend-up"></i> Part 1: Total Revenue</h2>
+                <div id="p1-summary" class="summary-badge">Total: RM 0.00</div>
+            </div>
             <div class="controls">
-                <select id="p1-type" onchange="toggleInput('p1')">
+                <select id="p1-type" onchange="toggleInput('p1'); loadData('p1');">
                     <option value="week">Weekly</option>
                     <option value="month">Monthly</option>
                 </select>
-                <input type="week" id="p1-week">
-                <input type="month" id="p1-month" style="display:none;">
-                <button onclick="loadData('p1')" class="btn-toggle">Update</button>
+                <input type="week" id="p1-week" onchange="loadData('p1')">
+                <input type="month" id="p1-month" style="display:none;" onchange="loadData('p1')">
             </div>
         </div>
         <div class="canvas-container">
@@ -37,19 +38,20 @@
 
     <div class="chart-card">
         <div class="chart-header">
-            <h2><i class="fa-solid fa-utensils"></i> Part 2: Product Order Volume</h2>
+            <div class="header-left">
+                <h2><i class="fa-solid fa-utensils"></i> Part 2: Product Order Volume</h2>
+                <div id="p2-summary" class="summary-badge">Total: 0 items</div>
+            </div>
             <div class="controls">
-                <select id="p2-type" onchange="toggleInput('p2')">
+                <select id="p2-type" onchange="toggleInput('p2'); loadData('p2');">
                     <option value="week">Weekly</option>
                     <option value="month">Monthly</option>
                 </select>
-                <input type="week" id="p2-week">
-                <input type="month" id="p2-month" style="display:none;">
-
-                <select id="p2-category" class="chart-filter">
+                <input type="week" id="p2-week" onchange="loadData('p2')">
+                <input type="month" id="p2-month" style="display:none;" onchange="loadData('p2')">
+                <select id="p2-category" class="chart-filter" onchange="loadData('p2')">
                     <option value="all">All Products</option>
                 </select>
-                <button onclick="loadData('p2')" class="btn-toggle">Update</button>
             </div>
         </div>
         <div class="canvas-container">
@@ -59,19 +61,20 @@
 
     <div class="chart-card">
         <div class="chart-header">
-            <h2><i class="fa-solid fa-tags"></i> Part 3: Revenue by Product</h2>
+            <div class="header-left">
+                <h2><i class="fa-solid fa-tags"></i> Part 3: Revenue by Product</h2>
+                <div id="p3-summary" class="summary-badge">Total: RM 0.00</div>
+            </div>
             <div class="controls">
-                <select id="p3-type" onchange="toggleInput('p3')">
+                <select id="p3-type" onchange="toggleInput('p3'); loadData('p3');">
                     <option value="week">Weekly</option>
                     <option value="month">Monthly</option>
                 </select>
-                <input type="week" id="p3-week">
-                <input type="month" id="p3-month" style="display:none;">
-
-                <select id="p3-category" class="chart-filter">
+                <input type="week" id="p3-week" onchange="loadData('p3')">
+                <input type="month" id="p3-month" style="display:none;" onchange="loadData('p3')">
+                <select id="p3-category" class="chart-filter" onchange="loadData('p3')">
                     <option value="all">All Products</option>
                 </select>
-                <button onclick="loadData('p3')" class="btn-toggle">Update</button>
             </div>
         </div>
         <div class="canvas-container">
@@ -80,165 +83,147 @@
     </div>
 
 </div>
-
 <script>
-    // 1. 全局图表基础配置 (移除写死的 RM，改为动态单位)
     const getCommonOptions = (unit = "RM") => ({
         responsive: true,
         maintainAspectRatio: false,
-        interaction: {
-            mode: 'index',
-            intersect: false
-        },
+        interaction: { mode: 'index', intersect: false },
         plugins: {
             legend: { labels: { color: '#ccc' } },
             tooltip: {
-                enabled: true,
                 backgroundColor: 'rgba(28, 33, 53, 0.9)',
-                callbacks: {
-                    label: function(context) {
-                        let label = context.dataset.label || '';
-                        let value = context.parsed.y;
-                        return label + ": " + (unit === "RM" ? "RM " + value.toFixed(2) : value + " items");
-                    }
-                }
+                callbacks: { label: (ctx) => ctx.dataset.label + ": " + (unit === "RM" ? "RM " + ctx.parsed.y.toFixed(2) : ctx.parsed.y + " items") }
             }
         },
         scales: {
             x: { ticks: { color: '#888' }, grid: { display: false } },
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    color: '#888',
-                    callback: function (value) {
-                        return unit === "RM" ? "RM " + value : value;
-                    }
-                },
-                grid: { color: '#2a304d' }
-            }
+            y: { beginAtZero: true, ticks: { color: '#888', callback: (v) => unit === "RM" ? "RM " + v : v }, grid: { color: '#2a304d' } }
         }
     });
 
-    // 2. 声明全局变量 (确保 loadData 能访问)
     let chartP1, chartP2, chartP3;
 
-    // 3. 页面加载完成后初始化
-    document.addEventListener('DOMContentLoaded', function() {
-        // P1 初始化 (总营收 - Line)
-        const ctx1 = document.getElementById('chart-p1').getContext('2d');
-        chartP1 = new Chart(ctx1, {
-            type: 'line',
-            data: {labels: [], datasets: [{label: 'Total Revenue', borderColor: '#d4af37', data: [], tension: 0.4, fill: false}]},
-            options: getCommonOptions("RM")
-        });
-
-        // P2 初始化 (销售量 - Line) - 注意：去掉 const，直接赋值给全局变量
-        const ctx2 = document.getElementById('chart-p2').getContext('2d'); // 确保 HTML 里 ID 是 chart-p2
-        chartP2 = new Chart(ctx2, {
-            type: 'line',
-            data: { labels: [], datasets: [] },
-            options: getCommonOptions("items")
-        });
-
-        // P3 初始化 (分类/产品营收 - Line)
-        const ctx3 = document.getElementById('chart-p3').getContext('2d'); // 确保 HTML 里 ID 是 chart-p3
-        chartP3 = new Chart(ctx3, {
-            type: 'line',
-            data: { labels: [], datasets: [] },
-            options: getCommonOptions("RM")
-        });
-
-        // 动态填充 P2 和 P3 的产品下拉框
-        fetch('VisualizeServlet?action=getProducts')
-            .then(response => response.json())
-            .then(data => {
-                ['p2-category', 'p3-category'].forEach(id => {
-                    const select = document.getElementById(id);
-                    if(!select) return;
-                    select.options.length = 1; // 只留 All Categories
-                    data.products.forEach(prod => {
-                        const opt = new Option(prod, prod);
-                        select.add(opt);
-                    });
-                });
-            });
-    });
-
-    // 4. 切换周/月输入
-    function toggleInput(partId) {
-        const type = document.getElementById(partId + '-type').value;
-        document.getElementById(partId + '-week').style.display = (type === 'week') ? 'inline-block' : 'none';
-        document.getElementById(partId + '-month').style.display = (type === 'month') ? 'inline-block' : 'none';
+    function getISOWeek(date) {
+        const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+        const dayNum = d.getUTCDay() || 7;
+        d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+        const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+        const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        return d.getUTCFullYear() + "-W" + weekNo.toString().padStart(2, '0');
     }
 
-    // 5. 加载数据
+    document.addEventListener('DOMContentLoaded', () => {
+        chartP1 = new Chart(document.getElementById('chart-p1').getContext('2d'), { type: 'line', data: {labels: [], datasets: [{label: 'Total Revenue', borderColor: '#d4af37', data: []}]}, options: getCommonOptions("RM") });
+        chartP2 = new Chart(document.getElementById('chart-p2').getContext('2d'), { type: 'line', data: {labels: [], datasets: []}, options: getCommonOptions("items") });
+        chartP3 = new Chart(document.getElementById('chart-p3').getContext('2d'), { type: 'line', data: {labels: [], datasets: []}, options: getCommonOptions("RM") });
+
+        const now = new Date();
+        const curM = now.toISOString().substring(0, 7);
+        const curW = getISOWeek(now);
+        ['p1', 'p2', 'p3'].forEach(p => {
+            document.getElementById(p + '-month').value = curM;
+            document.getElementById(p + '-week').value = curW;
+        });
+
+        fetch('VisualizeServlet?action=getProducts').then(res => res.json()).then(data => {
+            ['p2-category', 'p3-category'].forEach(id => data.products.forEach(p => document.getElementById(id).add(new Option(p, p))));
+            loadData('p1'); loadData('p2'); loadData('p3');
+        });
+    });
+
+    function toggleInput(p) {
+        const type = document.getElementById(p + '-type').value;
+        document.getElementById(p + '-week').style.display = (type === 'week' ? 'inline-block' : 'none');
+        document.getElementById(p + '-month').style.display = (type === 'month' ? 'inline-block' : 'none');
+    }
+
     function loadData(partId) {
         const type = document.getElementById(partId + '-type').value;
         const period = document.getElementById(partId + '-' + type).value;
+        const category = document.getElementById(partId + '-category')?.value || 'all';
+        if (!period) return;
 
-        // 获取分类/产品过滤器 (P2和P3现在都有了)
-        let extraParams = "";
-        const filterEl = document.getElementById(partId + '-category');
-        if (filterEl) {
-            extraParams = `&category=${filterEl.value}`;
-        }
-
-        if (!period) { alert("Please select a date!"); return; }
-
-        fetch(`VisualizeServlet?part=${partId}&type=${type}&period=${period}${extraParams}`)
-            .then(response => response.json())
+        fetch(`VisualizeServlet?part=${partId}&type=${type}&period=${period}&category=${category}`)
+            .then(res => res.json())
             .then(data => {
-                if (partId === 'p1') {
-                    updateSingleChart(chartP1, data.labels, data.values, 'Total Revenue');
-                } else if (partId === 'p2') {
-                    updateMultiChart(chartP2, data);
-                } else if (partId === 'p3') {
-                    updateMultiChart(chartP3, data);
+                const now = new Date();
+                let finalLabels = [];
+                let targetYear, targetMonth;
+
+                if (type === 'month') {
+                    [targetYear, targetMonth] = period.split('-').map(Number);
+                    let days = new Date(targetYear, targetMonth, 0).getDate();
+                    for (let d = 1; d <= days; d++) finalLabels.push(d.toString());
+                } else {
+                    finalLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
                 }
-            })
-            .catch(err => console.error("Fetch error:", err));
+
+                const isFuture = (idx) => {
+                    if (type === 'month') {
+                        const curY = now.getFullYear(), curM = now.getMonth() + 1, curD = now.getDate();
+                        if (targetYear > curY) return true;
+                        if (targetYear === curY && targetMonth > curM) return true;
+                        return (targetYear === curY && targetMonth === curM && (idx + 1) > curD);
+                    } else {
+                        const curW = getISOWeek(now), isoDay = now.getDay() || 7;
+                        if (period > curW) return true;
+                        return (period === curW && (idx + 1) > isoDay);
+                    }
+                };
+
+                if (partId === 'p1') {
+                    let vals = finalLabels.map((_, i) => isFuture(i) ? null : 0);
+                    data.labels.forEach((day, i) => {
+                        let idx = parseInt(day) - 1;
+                        if (idx >= 0 && idx < vals.length) vals[idx] = data.values[i];
+                    });
+                    const total = vals.reduce((a, b) => a + (b || 0), 0);
+                    document.getElementById('p1-summary').innerText = `Total: RM ${total.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+                    updateSingleChart(chartP1, finalLabels, vals, 'Total Revenue');
+                } else {
+                    let chartObj = (partId === 'p2' ? chartP2 : chartP3);
+                    let datasets = {};
+                    for (let prod in data.datasets) {
+                        let vals = finalLabels.map((_, i) => isFuture(i) ? null : 0);
+                        data.labels.forEach((day, i) => {
+                            let idx = parseInt(day) - 1;
+                            if (idx >= 0 && idx < vals.length) vals[idx] = data.datasets[prod][i];
+                        });
+                        datasets[prod] = vals;
+                    }
+                    let grandTotal = 0;
+                    for (let prod in datasets) {
+                        grandTotal += datasets[prod].reduce((a, b) => a + (b || 0), 0);
+                    }
+
+                    const unit = (partId === 'p2') ? "items" : "RM";
+                    const displayTotal = (unit === "RM") ? `Total: RM ${grandTotal.toLocaleString(undefined, {minimumFractionDigits: 2})}` : `Total: ${grandTotal} items`;
+                    document.getElementById(partId + '-summary').innerText = displayTotal;
+                    updateMultiChart(chartObj, { labels: finalLabels, datasets });
+                }
+            });
     }
 
-    // 6. 更新单线条图表 (P1)
-    function updateSingleChart(chart, labels, values, labelName) {
+    function updateSingleChart(chart, labels, values, label) {
         chart.data.labels = labels;
         chart.data.datasets[0].data = values;
-        chart.data.datasets[0].label = labelName;
+        chart.data.datasets[0].label = label;
         chart.update();
     }
 
-    // 7. 更新多线条图表 (P2 & P3)
     function updateMultiChart(chart, data) {
         chart.data.labels = data.labels;
         chart.data.datasets = [];
-
-        // 自动颜色生成器
-        const getDynamicColor = (str) => {
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                hash = str.charCodeAt(i) + ((hash << 5) - hash);
-            }
-            return `hsl(${Math.abs(hash) % 360}, 70%, 50%)`;
+        const getColor = (s) => {
+            let h = 0; for (let i = 0; i < s.length; i++) h = s.charCodeAt(i) + ((h << 5) - h);
+            return `hsl(${Math.abs(h) % 360}, 70%, 50%)`;
         };
-
-        if (data.datasets) {
-            for (let key in data.datasets) {
-                const color = getDynamicColor(key);
-                chart.data.datasets.push({
-                    label: key,
-                    data: data.datasets[key],
-                    borderColor: color,
-                    backgroundColor: color,
-                    borderWidth: 2,
-                    tension: 0.4,
-                    pointRadius: 4,
-                    fill: false
-                });
-            }
+        for (let key in data.datasets) {
+            let c = getColor(key);
+            chart.data.datasets.push({ label: key, data: data.datasets[key], borderColor: c, backgroundColor: c, tension: 0.4, fill: false, spanGaps: false });
         }
         chart.update();
     }
 </script>
-
 </body>
 </html>
