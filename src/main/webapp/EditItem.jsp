@@ -65,10 +65,6 @@
                 <input type="radio" name="cat" value="Drink" <%= "Drink".equals(oldCat) ? "checked" : "" %>>
                 <span>Drink</span>
             </label>
-            <label class="radio-item">
-                <input type="radio" name="cat" value="Dessert" <%= "Dessert".equals(oldCat) ? "checked" : "" %>>
-                <span>Dessert</span>
-            </label>
         </div>
 
         <div class="Upload-Image">Update Image (Optional)</div>

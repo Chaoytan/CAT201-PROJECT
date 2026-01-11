@@ -1,6 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+
+<%@ page import="com.coffeeshop.model.User" %>
+<%
+    // 1. Get the current user from the session
+    User currentUser = (User) session.getAttribute("currentUser");
+
+    // 2. Check if user is NOT logged in OR if user is NOT an admin
+    if (currentUser == null || !"admin".equalsIgnoreCase(currentUser.getRole())) {
+        // 3. Kick them to login page with an error message
+        session.setAttribute("errorMessage", "Access Denied! Admins only.");
+        response.sendRedirect("login.jsp");
+        return; // Stop the rest of the page from loading
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

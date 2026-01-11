@@ -16,12 +16,18 @@
     <h2>Welcome Back</h2>
     <p class="subtitle">Please enter your details to sign in.</p>
 
-    <%-- 错误信息显示 --%>
-    <% if (request.getAttribute("errorMessage") != null) { %>
-    <div class="error-message show-error">
-        <%= request.getAttribute("errorMessage") %>
+    <%
+        String errorMsg = (String) session.getAttribute("errorMessage");
+        if (errorMsg != null) {
+    %>
+    <div style="background-color: #fee2e2; color: #dc2626; border: 1px solid #fecaca; padding: 10px; border-radius: 6px; margin-bottom: 15px; text-align: center; font-weight: bold;">
+        <i class="fa-solid fa-triangle-exclamation"></i> <%= errorMsg %>
     </div>
-    <% } %>
+    <%
+            // Remove it so it doesn't stay forever
+            session.removeAttribute("errorMessage");
+        }
+    %>
 
     <form action="LoginServlet" method="post" onsubmit="return handleLogin()">
         <div class="form-group">

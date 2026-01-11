@@ -2,6 +2,19 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="com.coffeeshop.util.DBConnection" %>
 
+<%@ page import="com.coffeeshop.model.User" %>
+<%
+    // 1. Get the current user from the session
+    User currentUser = (User) session.getAttribute("currentUser");
+
+    // 2. Check if user is NOT logged in OR if user is NOT an admin
+    if (currentUser == null || !"admin".equalsIgnoreCase(currentUser.getRole())) {
+        // 3. Kick them to login page with an error message
+        session.setAttribute("errorMessage", "Access Denied! Admins only.");
+        response.sendRedirect("login.jsp");
+        return; // Stop the rest of the page from loading
+    }
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +35,7 @@
 
     <div class="nav-actions" style="display: flex; gap: 20px; align-items: center;">
 
-        <a href="main.jsp" style="text-decoration: none; color: white; font-weight: bold; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; transition: color 0.3s;">
+        <a href="main.jsp" class="nav-link" >
             <i class="fa-solid fa-house"></i> Home
         </a>
 
