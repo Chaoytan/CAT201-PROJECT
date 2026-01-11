@@ -53,13 +53,13 @@ public class AddItemServlet extends HttpServlet {
 
             // === 4. SAVE THE FILE ===
 
-            // A. Save to Server (So it works NOW)
+            // A. Save to Server
             String fullServerPath = serverPath + File.separator + fileName;
             filePart.write(fullServerPath);
 
-            // B. Copy to Source (So it works TOMORROW)
+            // B. Copy to Source
             try {
-                if (!sourcePath.contains("C:/Users/chaoy/IdeaProjects/CAT201_Project/src/main/webapp/images")) { // Only run if you updated the path
+                if (!sourcePath.contains("C:/Users/chaoy/IdeaProjects/CAT201_Project/src/main/webapp/images")) {
                     File sourceFile = new File(fullServerPath);
                     File destFile = new File(sourcePath + File.separator + fileName);
                     Files.copy(sourceFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -82,7 +82,7 @@ public class AddItemServlet extends HttpServlet {
             statement.executeUpdate();
             con.close();
 
-            response.sendRedirect("Admin-Menu.jsp");
+            response.sendRedirect("admin-menu.jsp");
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-/* 1. Page Layout (Fixed Centering) */
+/* Page Layout (Fixed Centering) */
 body {
     display: flex;
     min-height: 100vh;       /* Full Height */
@@ -23,7 +23,7 @@ body {
     text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Readable on any background */
 }
 
-/* 2. The Card Container */
+/* The Card Container */
 .register-container {
     background: white;
     padding: 40px;
@@ -32,13 +32,11 @@ body {
     width: 100%;
     max-width: 400px;
     text-align: center;
-
-    /* CRITICAL FIX: This safely centers the card */
     margin: auto;
     position: relative;
 }
 
-/* 3. Typography */
+/* Typography */
 h2 {
     margin-bottom: 10px;
     color: #8B4513; /* SaddleBrown */
@@ -52,7 +50,7 @@ p.subtitle {
     font-size: 0.95em;
 }
 
-/* 4. Form Elements */
+/* Form Elements */
 .form-group {
     margin-bottom: 15px;
     text-align: left;
@@ -85,7 +83,7 @@ input:focus {
     box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
 }
 
-/* 5. The Button */
+/* The Button */
 button {
     width: 100%;
     padding: 14px;
@@ -105,7 +103,7 @@ button:hover {
     box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
 }
 
-/* 6. Error Message (Fixed Visibility) */
+/* Error Message */
 .error-message {
     background-color: #fee2e2;
     color: #dc2626;
@@ -116,7 +114,7 @@ button:hover {
     font-size: 0.9rem;
     font-weight: 600;
     text-align: left;
-    display: flex; /* Flex helps align icon if you add one */
+    display: flex;
     align-items: center;
     gap: 8px;
 }
@@ -129,7 +127,7 @@ button:hover {
     margin: 0;
 }
 
-/* 7. Links & Checkbox */
+/* Links & Checkbox */
 .links {
     margin-top: 20px;
     font-size: 0.9rem;
@@ -222,7 +220,7 @@ button:hover {
 }
 
 .btn-agree {
-    background-color: #10b981; /* Nice Green */
+    background-color: #10b981;
     color: white;
     border: none;
     padding: 10px 24px;

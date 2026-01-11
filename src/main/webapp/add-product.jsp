@@ -5,7 +5,7 @@
 
     // 2. Check if user is NOT logged in OR if user is NOT an admin
     if (currentUser == null || !"admin".equalsIgnoreCase(currentUser.getRole())) {
-        // 3. Kick them to login page with an error message
+        // 3. Send to login page with an error message
         session.setAttribute("errorMessage", "Access Denied! Admins only.");
         response.sendRedirect("login.jsp");
         return; // Stop the rest of the page from loading
@@ -16,7 +16,8 @@
 <html>
 <head>
     <title>Add New Item</title>
-    <link rel="stylesheet" href="css/Item-Form.css">
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+    <link rel="stylesheet" href="css/add-product.css">
 </head>
 <body>
 
@@ -51,7 +52,7 @@
 
         <div class="Save-Button">
             <button class="Save" type="submit">Save</button>
-            <a href="Admin-Menu.jsp"><button class="Cancel" type="button">Cancel</button></a>
+            <a href="admin-menu.jsp"><button class="Cancel" type="button">Cancel</button></a>
         </div>
 
     </div>

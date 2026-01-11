@@ -21,7 +21,6 @@ public class RegisterServlet extends HttpServlet {
         String uAddr = request.getParameter("address");
 
         String hashedPass = HashUtil.hashSHA256(plainPass);
-        // SQL order matches your CREATE TABLE script exactly
         String sql = "INSERT INTO users (username, password, full_name, phone, address, email, role) VALUES (?, ?, ?, ?, ?, ?, 'customer')";
 
         try (Connection con = DBConnection.getConnection();

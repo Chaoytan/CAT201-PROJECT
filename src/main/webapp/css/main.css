@@ -1,12 +1,8 @@
-/* =========================================
-   1. GLOBAL RESET & LAYOUT
-   ========================================= */
+/* GLOBAL RESET & LAYOUT*/
 a { text-decoration: none; color: inherit; transition: color 0.2s; }
 button { cursor: pointer; }
 
-/* =========================================
-   2. HERO SECTION (Welcome Text)
-   ========================================= */
+/* HERO SECTION (Welcome Text)*/
 .hero-section {
     text-align: center;
     padding: 60px 20px;
@@ -27,9 +23,7 @@ button { cursor: pointer; }
     margin-bottom: 50px;
 }
 
-/* =========================================
-   4. CARD ROW (FLEXBOX)
-   ========================================= */
+/* 4. CARD ROW (FLEXBOX)*/
 .card-row {
     display: flex;           /* Makes cards sit side-by-side */
     justify-content: center; /* Centers them in the middle */
@@ -38,9 +32,7 @@ button { cursor: pointer; }
     align-items: stretch;    /* Forces all cards to be the same height */
 }
 
-/* =========================================
-   5. INDIVIDUAL CARD DESIGN
-   ========================================= */
+/* 5. INDIVIDUAL CARD DESIGN */
 .action-card {
     background: white;
     padding: 30px;
@@ -80,9 +72,7 @@ button { cursor: pointer; }
     text-align: center;
 }
 
-/* =========================================
-   6. BUTTONS
-   ========================================= */
+/*  6. BUTTONS */
 .btn-action {
     display: block;
     width: 100%;
@@ -92,16 +82,16 @@ button { cursor: pointer; }
     border-radius: 8px;
     font-weight: 600;
     color: white;
-    background-color: #8B4513; /* Default Brown */
+    background-color: #8B4513;
 }
 .btn-action:hover {background-color: #5c2b00; color: #ffffff;}
 
 .btn-cart {
-    background-color: #28a745; /* Green matches your checkout page */
+    background-color: #28a745;
     color: white;
 }
 .btn-cart:hover {
-    background-color: #218838; /* Darker Green on hover */
+    background-color: #218838;
 }
 
 .btn-secondary { background-color: #f0f0f0; color: #555; }

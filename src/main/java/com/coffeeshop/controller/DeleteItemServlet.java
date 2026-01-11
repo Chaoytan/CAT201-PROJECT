@@ -15,7 +15,6 @@ public class DeleteItemServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         try {
-            //Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection con = DBConnection.getConnection();
 
             PreparedStatement stmt = con.prepareStatement("DELETE FROM PRODUCTS WHERE id = ?");
@@ -23,6 +22,6 @@ public class DeleteItemServlet extends HttpServlet {
             stmt.executeUpdate();
             con.close();
         } catch (Exception e) { e.printStackTrace(); }
-        response.sendRedirect("Admin-Menu.jsp");
+        response.sendRedirect("admin-menu.jsp");
     }
 }

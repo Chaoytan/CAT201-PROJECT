@@ -145,7 +145,7 @@
                 // 2. Get Category from the card
                 const category = card.getAttribute("data-category");
 
-                // 3. Check Match ("all" shows everything)
+                // 3. Check Match
                 const matchesCategory = (selectedCategory === "all") || (category === selectedCategory);
 
                 // 4. Show or Hide

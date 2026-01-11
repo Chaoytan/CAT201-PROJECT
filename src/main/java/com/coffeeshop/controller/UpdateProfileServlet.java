@@ -35,7 +35,6 @@ public class UpdateProfileServlet extends HttpServlet {
 
         String newHashedPass = HashUtil.hashSHA256(newPass);
 
-        // Use try-with-resources to prevent connection leaks
         try (Connection con = DBConnection.getConnection()) {
 
             boolean isChangingPassword = (newPass != null && !newPass.trim().isEmpty());

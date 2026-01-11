@@ -74,7 +74,7 @@
 
         <a href="menu.jsp" class="btn-continue">Continue Shopping</a>
 
-        <%-- Link to Checkout Logic (We will build this next) --%>
+        <%-- Link to Checkout Logic --%>
         <a href="checkout.jsp" class="btn-checkout">Proceed to Checkout</a>
     </div>
 

@@ -76,6 +76,7 @@
     </div>
 </div>
 
+<%--Terms and Conditions--%>
 <div id="tcModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -109,7 +110,6 @@
 </div>
 
 <script>
-    // --- 原有的 Modal 逻辑保持不变 ---
     var modal = document.getElementById("tcModal");
     var link = document.getElementById("tcLink");
     var span = document.getElementsByClassName("close")[0];

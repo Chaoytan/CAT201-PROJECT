@@ -33,9 +33,9 @@ public class UpdateItemServlet extends HttpServlet {
             String sql;
             PreparedStatement stmt;
 
-            // CHECK: Did the user upload a NEW image?
+            // CHECK: Did the user upload a NEW image
             if (imageFileName != null && !imageFileName.isEmpty()) {
-                // A. YES: Update everything including the image
+                // Update everything including the image
 
                 // Save the new file to server (Same logic as AddItem)
                 String uploadPath = getServletContext().getRealPath("") + "images/" + imageFileName;
@@ -46,7 +46,6 @@ public class UpdateItemServlet extends HttpServlet {
                 fos.write(data);
                 fos.close();
 
-                // SQL with Image update
                 sql = "UPDATE PRODUCTS SET name=?, price=?, category=?, image_url=? WHERE id=?";
                 stmt = con.prepareStatement(sql);
                 stmt.setString(1, name);
@@ -56,7 +55,7 @@ public class UpdateItemServlet extends HttpServlet {
                 stmt.setString(5, id);
 
             } else {
-                // B. NO: Update only text fields, KEEP old image
+                // Update only text fields, KEEP old image
                 sql = "UPDATE PRODUCTS SET name=?, price=?, category=? WHERE id=?";
                 stmt = con.prepareStatement(sql);
                 stmt.setString(1, name);
@@ -72,6 +71,6 @@ public class UpdateItemServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        response.sendRedirect("Admin-Menu.jsp");
+        response.sendRedirect("admin-menu.jsp");
     }
 }

@@ -1,9 +1,7 @@
-/* =========================================
-   2. Navigation Bar
-   ========================================= */
+/* 2. Navigation Bar*/
 .brand-title {
     font-size: 1.5rem;
-    color: #8B4513; /* Coffee Brown */
+    color: #8B4513;
     font-weight: bold;
     margin: 0;
 }
@@ -33,7 +31,6 @@ h2 a:hover{
 .nav-links a:hover { color: #8B4513; }
 
 /* SPECIAL STYLE FOR CART BUTTON */
-/* We use !important to force the border/background over the default link style */
 a.cart-btn {
     background-color: #8B4513 !important;
     color: white !important;
@@ -49,9 +46,7 @@ a.cart-btn:hover {
     transform: translateY(-2px); /* Slight lift effect */
 }
 
-/* =========================================
-   3. Menu Layout (Fixing the Spacing)
-   ========================================= */
+/* 3. Menu Layout (Fixing the Spacing)*/
 .section-title {
     font-size: 1.8rem;
     color: #444;
@@ -68,9 +63,7 @@ a.cart-btn:hover {
     gap: 40px; /* Increased gap between cards */
 }
 
-/* =========================================
-   4. Food Card Design
-   ========================================= */
+/* 4. Food Card Design*/
 .food-card {
     background: white;
     border-radius: 12px;
@@ -122,14 +115,12 @@ a.cart-btn:hover {
     margin-bottom: 15px;
 }
 
-/* =========================================
-   5. Buttons
-   ========================================= */
+/* 5. Buttons */
 .btn-add {
     display: block;
     width: 100%;
     padding: 12px 0;
-    background-color: #f8f1e5; /* Beige background initially */
+    background-color: #f8f1e5;
     color: #8B4513;
     text-align: center;
     text-decoration: none;
